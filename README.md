@@ -84,7 +84,6 @@ DEBUG=cmc-* node app.js
 - [TurnstileProxylessRequest](https://zenno.link/doc-turnstile-en)
 - [TurnstileRequest](https://zenno.link/doc-turnstile-proxy-en)
 - [RecaptchaComplexImageTaskRequest](https://zenno.link/doc-complextask-rc-en)
-- [HcaptchaComplexImageTaskRequest](https://zenno.link/doc-complextask-hc-en)
 - [DataDome](https://zenno.link/doc-datadome-en)
 - [TenDI](https://zenno.link/doc-tendi-en)
 - [Amazon](https://zenno.link/doc-amazon-en)
