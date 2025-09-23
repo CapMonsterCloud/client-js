@@ -3,19 +3,23 @@ import { CapMonsterCloudClientFactory } from './CapMonsterCloudClientFactory';
 import { CaptchaResult } from './CaptchaResult';
 import { ClientOptions } from './ClientOptions';
 import { ErrorType } from './ErrorType';
-import { RecaptchaV2ProxylessRequest } from './Requests/RecaptchaV2ProxylessRequest';
 import { RecaptchaV2Request } from './Requests/RecaptchaV2Request';
-import { HCaptchaProxylessRequest } from './Requests/HCaptchaProxylessRequest';
 import { ComplexImageRecaptchaRequest } from './Requests/ComplexImageRecaptchaRequest';
 import { ComplexImageHCaptchaRequest } from './Requests/ComplexImageHCaptchaRequest';
 import { ComplexImageFunCaptchaRequest } from './Requests/ComplexImageFunCaptchaRequest';
 import { TenDIRequest } from './Requests/TenDIRequest';
-import { AmazonProxylessRequest } from './Requests/AmazonProxylessRequest';
+
 import { BasiliskRequest } from './Requests/BasiliskRequest';
 import { ImpervaRequest } from './Requests/ImpervaRequest';
 import { BinanceRequest } from './Requests/BinanceRequest';
 import { ComplexImageTaskRecognitionRequest } from './Requests/ComplexImageTaskRecognitionRequest';
-import { BinanceProxylessRequest } from './Requests/BinanceProxylessRequest';
+import { AmazonRequest } from './Requests/AmazonRequest';
+import { HCaptchaRequest } from './Requests/HCaptchaRequest';
+import { ProsopoRequest } from './Requests/ProsopoRequest';
+import { TemuRequest } from './Requests/TemuRequest';
+import { YidunRequest } from './Requests/YidunRequest';
+import { MTCaptchaRequest } from './Requests/MTCaptchaRequest';
+
 const { version } = require('../package.json'); // eslint-disable-line @typescript-eslint/no-var-requires
 
 describe('Check integration tests for CapMonsterCloudClientFactory()', () => {
@@ -65,7 +69,7 @@ describe('Check integration tests for CapMonsterCloudClientFactory()', () => {
       new ClientOptions({ clientKey: '<your capmonster.cloud API key>', serviceUrl: `http://localhost:${srv.address.port}` }),
     );
 
-    const recaptchaV2ProxylessRequest = new RecaptchaV2ProxylessRequest({
+    const recaptchaV2ProxylessRequest = new RecaptchaV2Request({
       websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high',
       websiteKey: '6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd',
     });
@@ -74,7 +78,7 @@ describe('Check integration tests for CapMonsterCloudClientFactory()', () => {
 
     expect(srv.caughtRequests[0]).toHaveProperty(
       'body',
-      '{"clientKey":"<your capmonster.cloud API key>","task":{"type":"NoCaptchaTaskProxyless","websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high","websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"},"softId":54}',
+      '{"clientKey":"<your capmonster.cloud API key>","task":{"type":"NoCaptchaTask","websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high","websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd"},"softId":54}',
     );
     expect(srv.caughtRequests[1]).toHaveProperty('body', '{"clientKey":"<your capmonster.cloud API key>","taskId":7654321}');
     expect(task).toHaveProperty('solution');
@@ -100,7 +104,7 @@ describe('Check integration tests for CapMonsterCloudClientFactory()', () => {
       new ClientOptions({ clientKey: '<your capmonster.cloud API key>', serviceUrl: `http://localhost:${srv.address.port}` }),
     );
 
-    const HRecaptachRequest = new HCaptchaProxylessRequest({
+    const HRecaptachRequest = new HCaptchaRequest({
       websiteURL: 'https://lessons.zennolab.com/captchas/hcaptcha/?level=easy',
       websiteKey: '6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd',
       fallbackToActualUA: true,
@@ -110,7 +114,7 @@ describe('Check integration tests for CapMonsterCloudClientFactory()', () => {
 
     expect(srv.caughtRequests[0]).toHaveProperty(
       'body',
-      '{"clientKey":"<your capmonster.cloud API key>","task":{"type":"HCaptchaTaskProxyless","websiteURL":"https://lessons.zennolab.com/captchas/hcaptcha/?level=easy","websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd","fallbackToActualUA":true},"softId":54}',
+      '{"clientKey":"<your capmonster.cloud API key>","task":{"type":"HCaptchaTask","websiteURL":"https://lessons.zennolab.com/captchas/hcaptcha/?level=easy","websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd","fallbackToActualUA":true},"softId":54}',
     );
     expect(srv.caughtRequests[1]).toHaveProperty('body', '{"clientKey":"<your capmonster.cloud API key>","taskId":7654321}');
     expect(task).toHaveProperty('solution');
@@ -138,12 +142,14 @@ describe('Check integration tests for CapMonsterCloudClientFactory()', () => {
     const recaptchaV2Request = new RecaptchaV2Request({
       websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=high',
       websiteKey: '6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd',
-      proxyType: 'http',
-      proxyAddress: '8.8.8.8',
-      proxyPort: 8080,
-      proxyLogin: 'proxyLoginHere',
-      proxyPassword: 'proxyPasswordHere',
       userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.132 Safari/537.36',
+      proxy: {
+        proxyType: 'http',
+        proxyAddress: '8.8.8.8',
+        proxyPort: 8080,
+        proxyLogin: 'proxyLoginHere',
+        proxyPassword: 'proxyPasswordHere',
+      },
     });
 
     const task = await cmcClient.Solve(recaptchaV2Request);
@@ -170,7 +176,7 @@ describe('Check integration tests for CapMonsterCloudClientFactory()', () => {
       new ClientOptions({ clientKey: '<your capmonster.cloud API key>', serviceUrl: `http://localhost:${srv.address.port}` }),
     );
 
-    const recaptchaV2Request = new RecaptchaV2ProxylessRequest({
+    const recaptchaV2Request = new RecaptchaV2Request({
       websiteURL: 'websiteURL',
       websiteKey: 'websiteKey',
       userAgent: 'userAgent',
@@ -205,7 +211,7 @@ describe('Check integration tests for CapMonsterCloudClientFactory()', () => {
       new ClientOptions({ clientKey: '<your capmonster.cloud API key>', serviceUrl: `http://localhost:${srv.address.port}` }),
     );
 
-    const recaptchaV2Request = new RecaptchaV2ProxylessRequest({
+    const recaptchaV2Request = new RecaptchaV2Request({
       websiteURL: 'websiteURL',
       websiteKey: 'websiteKey',
       userAgent: 'userAgent',
@@ -234,7 +240,7 @@ describe('Check integration tests for CapMonsterCloudClientFactory()', () => {
       new ClientOptions({ clientKey: '<your capmonster.cloud API key>', serviceUrl: `http://localhost:${srv.address.port}` }),
     );
 
-    const recaptchaV2Request = new RecaptchaV2ProxylessRequest({
+    const recaptchaV2Request = new RecaptchaV2Request({
       websiteURL: 'websiteURL',
       websiteKey: 'websiteKey',
       userAgent: 'userAgent',
@@ -257,7 +263,7 @@ describe('Check integration tests for CapMonsterCloudClientFactory()', () => {
 
     expect(srv.caughtRequests[0]).toHaveProperty(
       'body',
-      '{"clientKey":"<your capmonster.cloud API key>","task":{"type":"NoCaptchaTaskProxyless","websiteURL":"websiteURL","websiteKey":"websiteKey","userAgent":"userAgent"},"softId":54}',
+      '{"clientKey":"<your capmonster.cloud API key>","task":{"type":"NoCaptchaTask","websiteURL":"websiteURL","websiteKey":"websiteKey","userAgent":"userAgent"},"softId":54}',
     );
     expect(task).toBeInstanceOf(CaptchaResult);
     expect(task.solution).toBeUndefined();
@@ -280,7 +286,7 @@ describe('Check integration tests for CapMonsterCloudClientFactory()', () => {
       new ClientOptions({ clientKey: '<your capmonster.cloud API key>', serviceUrl: `http://localhost:${srv.address.port}` }),
     );
 
-    const recaptchaV2Request = new RecaptchaV2ProxylessRequest({
+    const recaptchaV2Request = new RecaptchaV2Request({
       websiteURL: 'websiteURL',
       websiteKey: 'websiteKey',
       userAgent: 'userAgent',
@@ -304,7 +310,7 @@ describe('Check integration tests for CapMonsterCloudClientFactory()', () => {
 
     expect(srv.caughtRequests[0]).toHaveProperty(
       'body',
-      '{"clientKey":"<your capmonster.cloud API key>","task":{"type":"NoCaptchaTaskProxyless","nocache":true,"websiteURL":"websiteURL","websiteKey":"websiteKey","userAgent":"userAgent"},"softId":54}',
+      '{"clientKey":"<your capmonster.cloud API key>","task":{"type":"NoCaptchaTask","nocache":true,"websiteURL":"websiteURL","websiteKey":"websiteKey","userAgent":"userAgent"},"softId":54}',
     );
     expect(task).toBeInstanceOf(CaptchaResult);
     expect(task.solution).toBeUndefined();
@@ -327,7 +333,7 @@ describe('Check integration tests for CapMonsterCloudClientFactory()', () => {
       new ClientOptions({ clientKey: '<your capmonster.cloud API key>', serviceUrl: `http://localhost:${srv.address.port}` }),
     );
 
-    const recaptchaV2Request = new RecaptchaV2ProxylessRequest({
+    const recaptchaV2Request = new RecaptchaV2Request({
       websiteURL: 'websiteURL',
       websiteKey: 'websiteKey',
     });
@@ -341,7 +347,7 @@ describe('Check integration tests for CapMonsterCloudClientFactory()', () => {
 
     expect(srv.caughtRequests[0]).toHaveProperty(
       'body',
-      '{"clientKey":"<your capmonster.cloud API key>","task":{"type":"NoCaptchaTaskProxyless","websiteURL":"websiteURL","websiteKey":"websiteKey"},"softId":54}',
+      '{"clientKey":"<your capmonster.cloud API key>","task":{"type":"NoCaptchaTask","websiteURL":"websiteURL","websiteKey":"websiteKey"},"softId":54}',
     );
     expect(task).toBeInstanceOf(CaptchaResult);
     expect(task.solution).toBeUndefined();
@@ -367,7 +373,7 @@ describe('Check integration tests for CapMonsterCloudClientFactory()', () => {
       new ClientOptions({ clientKey: '<your capmonster.cloud API key>', serviceUrl: `http://localhost:${srv.address.port}` }),
     );
 
-    const recaptchaV2Request = new RecaptchaV2ProxylessRequest({
+    const recaptchaV2Request = new RecaptchaV2Request({
       websiteURL: 'websiteURL',
       websiteKey: 'websiteKey',
     });
@@ -396,7 +402,7 @@ describe('Check integration tests for CapMonsterCloudClientFactory()', () => {
       new ClientOptions({ clientKey: '<your capmonster.cloud API key>', serviceUrl: `http://localhost:${srv.address.port}` }),
     );
 
-    const recaptchaV2Request = new RecaptchaV2ProxylessRequest({
+    const recaptchaV2Request = new RecaptchaV2Request({
       websiteURL: 'websiteURL',
       websiteKey: 'websiteKey',
     });
@@ -566,6 +572,48 @@ describe('Check integration tests for CapMonsterCloudClientFactory()', () => {
     expect(await srv.destroy()).toBeUndefined();
   });
 
+  it('should solve TenDI Task with Proxy', async () => {
+    expect.assertions(5);
+
+    const srv = await createServerMock({
+      responses: [
+        { responseBody: '{"errorId":0,"taskId":1234567}' },
+        {
+          responseBody:
+            '{"errorId":0,"status":"ready","solution":{"data": {"randstr": "@EcL", "ticket": "tr03lHUhdnuW3neJZu.....7LrIbs*"}, "headers": { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36" }}}',
+        },
+      ],
+    });
+
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+      new ClientOptions({ clientKey: '<your capmonster.cloud API key>', serviceUrl: `http://localhost:${srv.address.port}` }),
+    );
+
+    const tenDIRequest = new TenDIRequest({
+      websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle',
+      websiteKey: 'websiteKey',
+      proxy: {
+        proxyType: 'http',
+        proxyAddress: '8.8.8.8',
+        proxyPort: 8080,
+        proxyLogin: 'proxyLoginHere',
+        proxyPassword: 'proxyPasswordHere',
+      },
+    });
+
+    const task = await cmcClient.Solve(tenDIRequest);
+
+    expect(srv.caughtRequests[0]).toHaveProperty(
+      'body',
+      '{"clientKey":"<your capmonster.cloud API key>","task":{"type":"CustomTask","websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle","websiteKey":"websiteKey","class":"TenDI","proxyType":"http","proxyAddress":"8.8.8.8","proxyPort":8080,"proxyLogin":"proxyLoginHere","proxyPassword":"proxyPasswordHere"},"softId":54}',
+    );
+    expect(srv.caughtRequests[1]).toHaveProperty('body', '{"clientKey":"<your capmonster.cloud API key>","taskId":1234567}');
+    expect(task).toHaveProperty('solution');
+    expect(task).toHaveProperty('solution.data', { randstr: '@EcL', ticket: 'tr03lHUhdnuW3neJZu.....7LrIbs*' });
+
+    expect(await srv.destroy()).toBeUndefined();
+  });
+
   it('should solve Basilisk Task', async () => {
     expect.assertions(5);
 
@@ -601,6 +649,47 @@ describe('Check integration tests for CapMonsterCloudClientFactory()', () => {
     expect(await srv.destroy()).toBeUndefined();
   });
 
+  it('should solve Basilisk Task with Proxy', async () => {
+    expect.assertions(5);
+
+    const srv = await createServerMock({
+      responses: [
+        { responseBody: '{"errorId":0,"taskId":1234567}' },
+        {
+          responseBody:
+            '{"errorId":0,"status":"ready","solution":{"data": {"captcha_response": "5620301f30daf284b829fba66fa9b3d0"}, "headers": { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36" }}}',
+        },
+      ],
+    });
+
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+      new ClientOptions({ clientKey: '<your capmonster.cloud API key>', serviceUrl: `http://localhost:${srv.address.port}` }),
+    );
+
+    const basiliskRequest = new BasiliskRequest({
+      websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle',
+      websiteKey: 'websiteKey',
+      proxy: {
+        proxyType: 'http',
+        proxyAddress: '8.8.8.8',
+        proxyPort: 8080,
+        proxyLogin: 'proxyLoginHere',
+        proxyPassword: 'proxyPasswordHere',
+      },
+    });
+
+    const task = await cmcClient.Solve(basiliskRequest);
+
+    expect(srv.caughtRequests[0]).toHaveProperty(
+      'body',
+      '{"clientKey":"<your capmonster.cloud API key>","task":{"type":"CustomTask","websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle","websiteKey":"websiteKey","class":"Basilisk","proxyType":"http","proxyAddress":"8.8.8.8","proxyPort":8080,"proxyLogin":"proxyLoginHere","proxyPassword":"proxyPasswordHere"},"softId":54}',
+    );
+    expect(srv.caughtRequests[1]).toHaveProperty('body', '{"clientKey":"<your capmonster.cloud API key>","taskId":1234567}');
+    expect(task).toHaveProperty('solution');
+    expect(task).toHaveProperty('solution.data', { captcha_response: '5620301f30daf284b829fba66fa9b3d0' });
+
+    expect(await srv.destroy()).toBeUndefined();
+  });
   it('should solve Amazon Task', async () => {
     expect.assertions(5);
 
@@ -618,7 +707,7 @@ describe('Check integration tests for CapMonsterCloudClientFactory()', () => {
       new ClientOptions({ clientKey: '<your capmonster.cloud API key>', serviceUrl: `http://localhost:${srv.address.port}` }),
     );
 
-    const amazonRequest = new AmazonProxylessRequest({
+    const amazonRequest = new AmazonRequest({
       websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle',
       websiteKey: 'websiteKey',
       challengeScript: 'https://41bcdd4fb3cb.610cd090.us-east-1.token.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/challenge.js',
@@ -631,7 +720,7 @@ describe('Check integration tests for CapMonsterCloudClientFactory()', () => {
 
     expect(srv.caughtRequests[0]).toHaveProperty(
       'body',
-      '{"clientKey":"<your capmonster.cloud API key>","task":{"type":"AmazonTaskProxyless","websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle","challengeScript":"https://41bcdd4fb3cb.610cd090.us-east-1.token.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/challenge.js","captchaScript":"https://41bcdd4fb3cb.610cd090.us-east-1.captcha.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/captcha.js","websiteKey":"websiteKey","context":"qoJYgnKsc...aormh/dYYK+Y=","iv":"CgAAXFFFFSAAABVk"},"softId":54}',
+      '{"clientKey":"<your capmonster.cloud API key>","task":{"type":"AmazonTask","websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle","challengeScript":"https://41bcdd4fb3cb.610cd090.us-east-1.token.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/challenge.js","captchaScript":"https://41bcdd4fb3cb.610cd090.us-east-1.captcha.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/captcha.js","websiteKey":"websiteKey","context":"qoJYgnKsc...aormh/dYYK+Y=","iv":"CgAAXFFFFSAAABVk"},"softId":54}',
     );
     expect(srv.caughtRequests[1]).toHaveProperty('body', '{"clientKey":"<your capmonster.cloud API key>","taskId":1234567}');
     expect(task).toHaveProperty('solution');
@@ -680,6 +769,51 @@ describe('Check integration tests for CapMonsterCloudClientFactory()', () => {
 
     expect(await srv.destroy()).toBeUndefined();
   });
+  it('should solve Imperva Task with Proxy', async () => {
+    expect.assertions(5);
+
+    const srv = await createServerMock({
+      responses: [
+        { responseBody: '{"errorId":0,"taskId":1234567}' },
+        {
+          responseBody:
+            '{"errorId":0,"status":"ready","solution":{"domains": { "site.com" : { "cookies": { "___utmvc": "NMB", "reese84": "reese84"}} } }}',
+        },
+      ],
+    });
+
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+      new ClientOptions({ clientKey: '<your capmonster.cloud API key>', serviceUrl: `http://localhost:${srv.address.port}` }),
+    );
+
+    const impervaRequest = new ImpervaRequest({
+      websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle',
+      metadata: {
+        incapsulaScriptBase64: 'dmFyIF8weGQ2ZmU9Wydce..eDUzXHg2YV',
+        incapsulaSessionCookie: 'l/LsGnrvyB9lNhXI8borDKa2IGc',
+      },
+      proxy: {
+        proxyType: 'http',
+        proxyAddress: '8.8.8.8',
+        proxyPort: 8080,
+        proxyLogin: 'proxyLoginHere',
+        proxyPassword: 'proxyPasswordHere',
+      },
+    });
+
+    const task = await cmcClient.Solve(impervaRequest);
+
+    expect(srv.caughtRequests[0]).toHaveProperty(
+      'body',
+      '{"clientKey":"<your capmonster.cloud API key>","task":{"type":"CustomTask","websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle","metadata":{"incapsulaScriptBase64":"dmFyIF8weGQ2ZmU9Wydce..eDUzXHg2YV","incapsulaSessionCookie":"l/LsGnrvyB9lNhXI8borDKa2IGc"},"class":"Imperva","proxyType":"http","proxyAddress":"8.8.8.8","proxyPort":8080,"proxyLogin":"proxyLoginHere","proxyPassword":"proxyPasswordHere"},"softId":54}',
+    );
+    expect(srv.caughtRequests[1]).toHaveProperty('body', '{"clientKey":"<your capmonster.cloud API key>","taskId":1234567}');
+    expect(task).toHaveProperty('solution');
+
+    expect(task).toHaveProperty('solution.domains', { 'site.com': { cookies: { ___utmvc: 'NMB', reese84: 'reese84' } } });
+
+    expect(await srv.destroy()).toBeUndefined();
+  });
   it('should solve Binance Task', async () => {
     expect.assertions(5);
 
@@ -701,18 +835,20 @@ describe('Check integration tests for CapMonsterCloudClientFactory()', () => {
       websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle',
       websiteKey: 'websiteKey',
       validateId: 'validateId',
-      proxyType: 'http',
-      proxyAddress: '8.8.8.8',
-      proxyPort: 8080,
-      proxyLogin: 'proxyLoginHere',
-      proxyPassword: 'proxyPasswordHere',
+      proxy: {
+        proxyType: 'http',
+        proxyAddress: '8.8.8.8',
+        proxyPort: 8080,
+        proxyLogin: 'proxyLoginHere',
+        proxyPassword: 'proxyPasswordHere',
+      },
     });
 
     const task = await cmcClient.Solve(binanceRequest);
 
     expect(srv.caughtRequests[0]).toHaveProperty(
       'body',
-      '{"clientKey":"<your capmonster.cloud API key>","task":{"type":"BinanceTaskProxyless","websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle","websiteKey":"websiteKey","validateId":"validateId","proxyType":"http","proxyAddress":"8.8.8.8","proxyPort":8080,"proxyLogin":"proxyLoginHere","proxyPassword":"proxyPasswordHere"},"softId":54}',
+      '{"clientKey":"<your capmonster.cloud API key>","task":{"type":"BinanceTask","websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle","websiteKey":"websiteKey","validateId":"validateId","proxyType":"http","proxyAddress":"8.8.8.8","proxyPort":8080,"proxyLogin":"proxyLoginHere","proxyPassword":"proxyPasswordHere"},"softId":54}',
     );
     expect(srv.caughtRequests[1]).toHaveProperty('body', '{"clientKey":"<your capmonster.cloud API key>","taskId":1234567}');
     expect(task).toHaveProperty('solution');
@@ -740,7 +876,7 @@ describe('Check integration tests for CapMonsterCloudClientFactory()', () => {
       new ClientOptions({ clientKey: '<your capmonster.cloud API key>', serviceUrl: `http://localhost:${srv.address.port}` }),
     );
 
-    const binanceRequest = new BinanceProxylessRequest({
+    const binanceRequest = new BinanceRequest({
       websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle',
       websiteKey: 'websiteKey',
       validateId: 'validateId',
@@ -750,7 +886,7 @@ describe('Check integration tests for CapMonsterCloudClientFactory()', () => {
 
     expect(srv.caughtRequests[0]).toHaveProperty(
       'body',
-      '{"clientKey":"<your capmonster.cloud API key>","task":{"type":"BinanceTaskProxyless","websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle","websiteKey":"websiteKey","validateId":"validateId"},"softId":54}',
+      '{"clientKey":"<your capmonster.cloud API key>","task":{"type":"BinanceTask","websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle","websiteKey":"websiteKey","validateId":"validateId"},"softId":54}',
     );
     expect(srv.caughtRequests[1]).toHaveProperty('body', '{"clientKey":"<your capmonster.cloud API key>","taskId":1234567}');
     expect(task).toHaveProperty('solution');
@@ -791,6 +927,246 @@ describe('Check integration tests for CapMonsterCloudClientFactory()', () => {
     expect(srv.caughtRequests[1]).toHaveProperty('body', '{"clientKey":"<your capmonster.cloud API key>","taskId":1234567}');
     expect(task).toHaveProperty('solution');
     expect(task).toHaveProperty('solution.answer', [130.90909]);
+
+    expect(await srv.destroy()).toBeUndefined();
+  });
+  it('should solve Prosopo Task', async () => {
+    expect.assertions(5);
+
+    const srv = await createServerMock({
+      responses: [
+        { responseBody: '{"errorId":0,"taskId":1234567}' },
+        {
+          responseBody:
+            '{"errorId":0,"status":"ready","solution":{"token":"0x00016c68747470733a2f2f70726f6e6f6465332e70726f736f706f2e696fc0354550516f4d5a454463354c704e376774784d4d7a5950547a4136"}}',
+        },
+      ],
+    });
+
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+      new ClientOptions({ clientKey: '<your capmonster.cloud API key>', serviceUrl: `http://localhost:${srv.address.port}` }),
+    );
+
+    const prosopoRequest = new ProsopoRequest({
+      websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle',
+      websiteKey: 'websiteKey',
+      proxy: {
+        proxyType: 'http',
+        proxyAddress: '8.8.8.8',
+        proxyPort: 8080,
+        proxyLogin: 'proxyLoginHere',
+        proxyPassword: 'proxyPasswordHere',
+      },
+    });
+
+    const task = await cmcClient.Solve(prosopoRequest);
+
+    expect(srv.caughtRequests[0]).toHaveProperty(
+      'body',
+      '{"clientKey":"<your capmonster.cloud API key>","task":{"type":"ProsopoTask","websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle","websiteKey":"websiteKey","proxyType":"http","proxyAddress":"8.8.8.8","proxyPort":8080,"proxyLogin":"proxyLoginHere","proxyPassword":"proxyPasswordHere"},"softId":54}',
+    );
+    expect(srv.caughtRequests[1]).toHaveProperty('body', '{"clientKey":"<your capmonster.cloud API key>","taskId":1234567}');
+    expect(task).toHaveProperty('solution');
+    expect(task).toHaveProperty(
+      'solution.token',
+      '0x00016c68747470733a2f2f70726f6e6f6465332e70726f736f706f2e696fc0354550516f4d5a454463354c704e376774784d4d7a5950547a4136',
+    );
+
+    expect(await srv.destroy()).toBeUndefined();
+  });
+  it('should solve Prosopo Task Proxyless', async () => {
+    expect.assertions(5);
+
+    const srv = await createServerMock({
+      responses: [
+        { responseBody: '{"errorId":0,"taskId":1234567}' },
+        {
+          responseBody:
+            '{"errorId":0,"status":"ready","solution":{"token":"0x00016c68747470733a2f2f70726f6e6f6465332e70726f736f706f2e696fc0354550516f4d5a454463354c704e376774784d4d7a5950547a4136"}}',
+        },
+      ],
+    });
+
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+      new ClientOptions({ clientKey: '<your capmonster.cloud API key>', serviceUrl: `http://localhost:${srv.address.port}` }),
+    );
+
+    const prosopoRequest = new ProsopoRequest({
+      websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle',
+      websiteKey: 'websiteKey',
+    });
+
+    const task = await cmcClient.Solve(prosopoRequest);
+
+    expect(srv.caughtRequests[0]).toHaveProperty(
+      'body',
+      '{"clientKey":"<your capmonster.cloud API key>","task":{"type":"ProsopoTask","websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle","websiteKey":"websiteKey"},"softId":54}',
+    );
+    expect(srv.caughtRequests[1]).toHaveProperty('body', '{"clientKey":"<your capmonster.cloud API key>","taskId":1234567}');
+    expect(task).toHaveProperty('solution');
+    expect(task).toHaveProperty(
+      'solution.token',
+      '0x00016c68747470733a2f2f70726f6e6f6465332e70726f736f706f2e696fc0354550516f4d5a454463354c704e376774784d4d7a5950547a4136',
+    );
+
+    expect(await srv.destroy()).toBeUndefined();
+  });
+
+  it('should solve Temu Task', async () => {
+    expect.assertions(5);
+
+    const srv = await createServerMock({
+      responses: [
+        { responseBody: '{"errorId":0,"taskId":1234567}' },
+        {
+          responseBody:
+            '{"errorId":0,"status":"ready","solution":{"domains": {"www.temu.com": {"cookies": {"privacy_setting_detail":"%7B%22firstPAds"}}}, "headers": { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36" }}}',
+        },
+      ],
+    });
+
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+      new ClientOptions({ clientKey: '<your capmonster.cloud API key>', serviceUrl: `http://localhost:${srv.address.port}` }),
+    );
+
+    const temuRequest = new TemuRequest({
+      websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle',
+      metadata: {
+        cookie: 'region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2Bo',
+      },
+    });
+
+    const task = await cmcClient.Solve(temuRequest);
+
+    expect(srv.caughtRequests[0]).toHaveProperty(
+      'body',
+      '{"clientKey":"<your capmonster.cloud API key>","task":{"type":"CustomTask","websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle","metadata":{"cookie":"region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2Bo"},"class":"Temu"},"softId":54}',
+    );
+    expect(srv.caughtRequests[1]).toHaveProperty('body', '{"clientKey":"<your capmonster.cloud API key>","taskId":1234567}');
+    expect(task).toHaveProperty('solution');
+    expect(task).toHaveProperty('solution.domains', { 'www.temu.com': { cookies: { privacy_setting_detail: '%7B%22firstPAds' } } });
+
+    expect(await srv.destroy()).toBeUndefined();
+  });
+
+  it('should solve Temu Task with Proxy', async () => {
+    expect.assertions(5);
+
+    const srv = await createServerMock({
+      responses: [
+        { responseBody: '{"errorId":0,"taskId":1234567}' },
+        {
+          responseBody:
+            '{"errorId":0,"status":"ready","solution":{"domains": {"www.temu.com": {"cookies": {"privacy_setting_detail":"%7B%22firstPAds"}}}, "headers": { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36" }}}',
+        },
+      ],
+    });
+
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+      new ClientOptions({ clientKey: '<your capmonster.cloud API key>', serviceUrl: `http://localhost:${srv.address.port}` }),
+    );
+
+    const temuRequest = new TemuRequest({
+      websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle',
+      metadata: {
+        cookie: 'region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2Bo',
+      },
+      proxy: {
+        proxyType: 'http',
+        proxyAddress: '8.8.8.8',
+        proxyPort: 8080,
+        proxyLogin: 'proxyLoginHere',
+        proxyPassword: 'proxyPasswordHere',
+      },
+    });
+
+    const task = await cmcClient.Solve(temuRequest);
+
+    expect(srv.caughtRequests[0]).toHaveProperty(
+      'body',
+      '{"clientKey":"<your capmonster.cloud API key>","task":{"type":"CustomTask","websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle","metadata":{"cookie":"region=141; language=en; currency=EUR; api_uid=CnBpI2fwFW2Bo"},"class":"Temu","proxyType":"http","proxyAddress":"8.8.8.8","proxyPort":8080,"proxyLogin":"proxyLoginHere","proxyPassword":"proxyPasswordHere"},"softId":54}',
+    );
+    expect(srv.caughtRequests[1]).toHaveProperty('body', '{"clientKey":"<your capmonster.cloud API key>","taskId":1234567}');
+    expect(task).toHaveProperty('solution');
+    expect(task).toHaveProperty('solution.domains', { 'www.temu.com': { cookies: { privacy_setting_detail: '%7B%22firstPAds' } } });
+
+    expect(await srv.destroy()).toBeUndefined();
+  });
+
+  it('should solve Yidun Task Proxyless', async () => {
+    expect.assertions(5);
+
+    const srv = await createServerMock({
+      responses: [
+        { responseBody: '{"errorId":0,"taskId":1234567}' },
+        {
+          responseBody:
+            '{"errorId":0,"status":"ready","solution":{"token":"0x00016c68747470733a2f2f70726f6e6f6465332e70726f736f706f2e696fc0354550516f4d5a454463354c704e376774784d4d7a5950547a4136"}}',
+        },
+      ],
+    });
+
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+      new ClientOptions({ clientKey: '<your capmonster.cloud API key>', serviceUrl: `http://localhost:${srv.address.port}` }),
+    );
+
+    const yidunRequest = new YidunRequest({
+      websiteURL: 'https://id7.cloud.example.com/IframeLogin.html',
+      websiteKey: 'websiteKey',
+    });
+
+    const task = await cmcClient.Solve(yidunRequest);
+
+    expect(srv.caughtRequests[0]).toHaveProperty(
+      'body',
+      '{"clientKey":"<your capmonster.cloud API key>","task":{"type":"YidunTask","websiteURL":"https://id7.cloud.example.com/IframeLogin.html","websiteKey":"websiteKey"},"softId":54}',
+    );
+    expect(srv.caughtRequests[1]).toHaveProperty('body', '{"clientKey":"<your capmonster.cloud API key>","taskId":1234567}');
+    expect(task).toHaveProperty('solution');
+    expect(task).toHaveProperty(
+      'solution.token',
+      '0x00016c68747470733a2f2f70726f6e6f6465332e70726f736f706f2e696fc0354550516f4d5a454463354c704e376774784d4d7a5950547a4136',
+    );
+
+    expect(await srv.destroy()).toBeUndefined();
+  });
+
+  it('should solve MTCaptcha Task Proxyless', async () => {
+    expect.assertions(5);
+
+    const srv = await createServerMock({
+      responses: [
+        { responseBody: '{"errorId":0,"taskId":1234567}' },
+        {
+          responseBody:
+            '{"errorId":0,"status":"ready","solution":{"token":"0x00016c68747470733a2f2f70726f6e6f6465332e70726f736f706f2e696fc0354550516f4d5a454463354c704e376774784d4d7a5950547a4136"}}',
+        },
+      ],
+    });
+
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+      new ClientOptions({ clientKey: '<your capmonster.cloud API key>', serviceUrl: `http://localhost:${srv.address.port}` }),
+    );
+
+    const mtCaptchaRequest = new MTCaptchaRequest({
+      websiteURL: 'https://www.example.com',
+      websiteKey: 'websiteKey',
+      pageAction: 'login',
+      isInvisible: false,
+    });
+
+    const task = await cmcClient.Solve(mtCaptchaRequest);
+
+    expect(srv.caughtRequests[0]).toHaveProperty(
+      'body',
+      '{"clientKey":"<your capmonster.cloud API key>","task":{"type":"MTCaptchaTask","websiteURL":"https://www.example.com","websiteKey":"websiteKey","pageAction":"login","isInvisible":false},"softId":54}',
+    );
+    expect(srv.caughtRequests[1]).toHaveProperty('body', '{"clientKey":"<your capmonster.cloud API key>","taskId":1234567}');
+    expect(task).toHaveProperty('solution');
+    expect(task).toHaveProperty(
+      'solution.token',
+      '0x00016c68747470733a2f2f70726f6e6f6465332e70726f736f706f2e696fc0354550516f4d5a454463354c704e376774784d4d7a5950547a4136',
+    );
 
     expect(await srv.destroy()).toBeUndefined();
   });

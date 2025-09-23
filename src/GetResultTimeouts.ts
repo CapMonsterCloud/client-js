@@ -89,12 +89,31 @@ export const BinanceTaskTimeouts = {
   timeout: 1000 * 80,
 } as GetResultTimeouts;
 
+export const ProsopoTaskTimeouts = {
+  firstRequestDelay: 1000 * 1,
+  firstRequestNoCacheDelay: 1000 * 10,
+  requestsInterval: 1000 * 1,
+  timeout: 1000 * 80,
+} as GetResultTimeouts;
+
+export const YidunTaskTimeouts = {
+  firstRequestDelay: 1000 * 1,
+  firstRequestNoCacheDelay: 1000 * 10,
+  requestsInterval: 1000 * 1,
+  timeout: 1000 * 80,
+} as GetResultTimeouts;
+
+export const MTCaptchaTaskTimeouts = {
+  firstRequestDelay: 1000 * 1,
+  firstRequestNoCacheDelay: 1000 * 10,
+  requestsInterval: 1000 * 1,
+  timeout: 1000 * 80,
+} as GetResultTimeouts;
+
 export function detectResultTimeouts(task: Task): GetResultTimeouts {
   switch (task.type) {
-    case TaskType.FunCaptchaTaskProxyless:
     case TaskType.FunCaptchaTask:
       return FunCaptchaTimeouts;
-    case TaskType.GeeTestTaskProxyless:
     case TaskType.GeeTestTask:
       return GeeTestTimeouts;
     case TaskType.HCaptchaTaskProxyless:
@@ -102,7 +121,6 @@ export function detectResultTimeouts(task: Task): GetResultTimeouts {
       return HCaptchaTimeouts;
     case TaskType.ImageToTextTask:
       return ImageToTextTimeouts;
-    case TaskType.RecaptchaV2EnterpriseTaskProxyless:
     case TaskType.RecaptchaV2EnterpriseTask:
       return RecaptchaV2EnterpriseTimeouts;
     case TaskType.NoCaptchaTaskProxyless:
@@ -110,19 +128,22 @@ export function detectResultTimeouts(task: Task): GetResultTimeouts {
       return RecaptchaV2Timeouts;
     case TaskType.RecaptchaV3TaskProxyless:
       return RecaptchaV3Timeouts;
-    case TaskType.TurnstileTaskProxyless:
     case TaskType.TurnstileTask:
       return TurnstileTimeouts;
     case TaskType.ComplexImageTask:
       return ComplexImageTimeouts;
     case TaskType.CustomTask:
       return CustomTaskTimeouts;
-    case TaskType.AmazonTaskProxyless:
     case TaskType.AmazonTask:
       return AmazonTaskTimeouts;
-    case TaskType.BinanceTaskProxyless:
     case TaskType.BinanceTask:
       return BinanceTaskTimeouts;
+    case TaskType.ProsopoTask:
+      return ProsopoTaskTimeouts;
+    case TaskType.YidunTask:
+      return YidunTaskTimeouts;
+    case TaskType.MTCaptchaTask:
+      return MTCaptchaTaskTimeouts;
     default:
       throw new Error(`Could not detect result timeouts for provided task type = ${task.type}`);
   }

@@ -9,23 +9,18 @@ import { detectResultTimeouts, GetResultTimeouts } from './GetResultTimeouts';
 import { HttpClient, HttpStatusCode, HttpStatusError, JSONParseError } from './HttpClient';
 import { Task } from './Requests/Task';
 import { debugTask } from './Logger';
-import { FunCaptchaProxylessRequest } from './Requests/FunCaptchaProxylessRequest';
+
 import { FunCaptchaResponse } from './Responses/FunCaptchaResponse';
 import { FunCaptchaRequest } from './Requests/FunCaptchaRequest';
-import { GeeTestProxylessRequest } from './Requests/GeeTestProxylessRequest';
 import { GeeTestResponse } from './Responses/GeeTestResponse';
 import { GeeTestRequest } from './Requests/GeeTestRequest';
-import { HCaptchaProxylessRequest } from './Requests/HCaptchaProxylessRequest';
 import { HCaptchaResponse } from './Responses/HCaptchaResponse';
 import { HCaptchaRequest } from './Requests/HCaptchaRequest';
 import { TurnstileRequest } from './Requests/TurnstileRequest';
-import { TurnstileProxylessRequest } from './Requests/TurnstileRequestProxyless';
 import { ImageToTextRequest } from './Requests/ImageToTextRequest';
 import { ImageToTextResponse } from './Responses/ImageToTextResponse';
-import { RecaptchaV2EnterpriseProxylessRequest } from './Requests/RecaptchaV2EnterpriseProxylessRequest';
 import { RecaptchaV2EnterpriseResponse } from './Responses/RecaptchaV2EnterpriseResponse';
 import { RecaptchaV2EnterpriseRequest } from './Requests/RecaptchaV2EnterpriseRequest';
-import { RecaptchaV2ProxylessRequest } from './Requests/RecaptchaV2ProxylessRequest';
 import { RecaptchaV2Response } from './Responses/RecaptchaV2Response';
 import { RecaptchaV2Request } from './Requests/RecaptchaV2Request';
 import { RecaptchaV3ProxylessRequest } from './Requests/RecaptchaV3ProxylessRequest';
@@ -40,7 +35,6 @@ import { DataDomeResponse } from './Responses/DataDomeResponse';
 import { DataDomeRequest } from './Requests/DataDomeRequest';
 import { TenDIRequest } from './Requests/TenDIRequest';
 import { TenDIResponse } from './Responses/TenDIResponse';
-import { AmazonProxylessRequest } from './Requests/AmazonProxylessRequest';
 import { AmazonResponse } from './Responses/AmazonResponse';
 import { AmazonRequest } from './Requests/AmazonRequest';
 import { BasiliskRequest } from './Requests/BasiliskRequest';
@@ -51,7 +45,25 @@ import { BinanceRequest } from './Requests/BinanceRequest';
 import { BinanceResponse } from './Responses/BinanceResponse';
 import { ComplexImageTaskRecognitionRequest } from './Requests/ComplexImageTaskRecognitionRequest';
 import { ComplexImageRecognitionResponse } from './Responses/ComplexImageRecognitionResponse';
-import { BinanceProxylessRequest } from './Requests/BinanceProxylessRequest';
+import { ProsopoRequest } from './Requests/ProsopoRequest';
+import { ProsopoResponse } from './Responses/ProsopoResponse';
+import { TemuRequest } from './Requests/TemuRequest';
+import { TemuResponse } from './Responses/TemuResponse';
+import { YidunRequest } from './Requests/YidunRequest';
+import { YidunResponse } from './Responses/YidunResponse';
+import { MTCaptchaRequest } from './Requests/MTCaptchaRequest';
+import { MTCaptchaResponse } from './Responses/MTCaptchaResponse';
+
+type CustomTaskUnion = TemuRequest | BasiliskRequest | ImpervaRequest;
+
+type ResponseForCustomTask<T> = T extends TemuRequest
+  ? TemuResponse
+  : T extends BasiliskRequest
+  ? BasiliskResponse
+  : T extends ImpervaRequest
+  ? ImpervaResponse
+  : never;
+
 /**
  * Base type for capmonster.cloud Client exceptions
  */
@@ -156,16 +168,6 @@ export class CapMonsterCloudClient {
       throw err;
     }
   }
-
-  /**
-   * Solve FunCaptchaTaskProxyless task
-   * You will get response within 10 - 80 secs period depending on service workload.
-   */
-  public async Solve(
-    task: FunCaptchaProxylessRequest,
-    resultTimeouts?: GetResultTimeouts,
-    cancellationController?: AbortController,
-  ): Promise<CaptchaResult<FunCaptchaResponse>>;
   /**
    * Solve FunCaptchaTask task
    * You will get response within 10 - 80 secs period depending on service workload.
@@ -176,15 +178,6 @@ export class CapMonsterCloudClient {
     cancellationController?: AbortController,
   ): Promise<CaptchaResult<FunCaptchaResponse>>;
   /**
-   * Solve GeeTestTaskProxyless task
-   * You will get response within 10 - 80 secs period depending on service workload.
-   */
-  public async Solve(
-    task: GeeTestProxylessRequest,
-    resultTimeouts?: GetResultTimeouts,
-    cancellationController?: AbortController,
-  ): Promise<CaptchaResult<GeeTestResponse>>;
-  /**
    * Solve GeeTestTask task
    * You will get response within 10 - 80 secs period depending on service workload.
    */
@@ -193,15 +186,7 @@ export class CapMonsterCloudClient {
     resultTimeouts?: GetResultTimeouts,
     cancellationController?: AbortController,
   ): Promise<CaptchaResult<GeeTestResponse>>;
-  /**
-   * Solve HCaptchaTaskProxyless task
-   * You will get response within 10 - 180 secs period depending on service workload.
-   */
-  public async Solve(
-    task: HCaptchaProxylessRequest,
-    resultTimeouts?: GetResultTimeouts,
-    cancellationController?: AbortController,
-  ): Promise<CaptchaResult<HCaptchaResponse>>;
+
   /**
    * Solve HCaptchaTask task
    * You will get response within 10 - 180 secs period depending on service workload.
@@ -221,15 +206,6 @@ export class CapMonsterCloudClient {
     cancellationController?: AbortController,
   ): Promise<CaptchaResult<ImageToTextResponse>>;
   /**
-   * Solve RecaptchaV2EnterpriseTaskProxyless task
-   * You will get response within 10 - 180 secs period depending on service workload.
-   */
-  public async Solve(
-    task: RecaptchaV2EnterpriseProxylessRequest,
-    resultTimeouts?: GetResultTimeouts,
-    cancellationController?: AbortController,
-  ): Promise<CaptchaResult<RecaptchaV2EnterpriseResponse>>;
-  /**
    * Solve RecaptchaV2EnterpriseTask task
    * You will get response within 10 - 180 secs period depending on service workload.
    */
@@ -238,15 +214,6 @@ export class CapMonsterCloudClient {
     resultTimeouts?: GetResultTimeouts,
     cancellationController?: AbortController,
   ): Promise<CaptchaResult<RecaptchaV2EnterpriseResponse>>;
-  /**
-   * Solve NoCaptchaTaskProxyless task
-   * You will get response within 10 - 180 secs period depending on service workload.
-   */
-  public async Solve(
-    task: RecaptchaV2ProxylessRequest,
-    resultTimeouts?: GetResultTimeouts,
-    cancellationController?: AbortController,
-  ): Promise<CaptchaResult<RecaptchaV2Response>>;
   /**
    * Solve NoCaptchaTask task
    * You will get response within 10 - 180 secs period depending on service workload.
@@ -284,38 +251,20 @@ export class CapMonsterCloudClient {
     cancellationController?: AbortController,
   ): Promise<CaptchaResult<TenDIResponse>>;
   /**
-   * Solve Basilisk task
+   * Solve CustomTask task
    * You will get response within 10 - 180 secs period depending on service workload.
    */
-  public async Solve(
-    task: BasiliskRequest,
+  public async Solve<T extends CustomTaskUnion>(
+    task: T,
     resultTimeouts?: GetResultTimeouts,
     cancellationController?: AbortController,
-  ): Promise<CaptchaResult<BasiliskResponse>>;
-  /**
-   * Solve Imperva task
-   * You will get response within 10 - 180 secs period depending on service workload.
-   */
-  public async Solve(
-    task: ImpervaRequest,
-    resultTimeouts?: GetResultTimeouts,
-    cancellationController?: AbortController,
-  ): Promise<CaptchaResult<ImpervaResponse>>;
+  ): Promise<CaptchaResult<ResponseForCustomTask<T>>>;
   /**
    * Solve Binance task
    * You will get response within 10 - 180 secs period depending on service workload.
    */
   public async Solve(
     task: BinanceRequest,
-    resultTimeouts?: GetResultTimeouts,
-    cancellationController?: AbortController,
-  ): Promise<CaptchaResult<BinanceResponse>>;
-  /**
-   * Solve BinanceProxyless task
-   * You will get response within 10 - 180 secs period depending on service workload.
-   */
-  public async Solve(
-    task: BinanceProxylessRequest,
     resultTimeouts?: GetResultTimeouts,
     cancellationController?: AbortController,
   ): Promise<CaptchaResult<BinanceResponse>>;
@@ -333,7 +282,7 @@ export class CapMonsterCloudClient {
    * You will get response within 10 - 180 secs period depending on service workload.
    */
   public async Solve(
-    task: AmazonProxylessRequest,
+    task: AmazonRequest,
     resultTimeouts?: GetResultTimeouts,
     cancellationController?: AbortController,
   ): Promise<CaptchaResult<AmazonResponse>>;
@@ -346,15 +295,6 @@ export class CapMonsterCloudClient {
     resultTimeouts?: GetResultTimeouts,
     cancellationController?: AbortController,
   ): Promise<CaptchaResult<AmazonResponse>>;
-  /**
-   * Solve TurnstileProxyless task
-   * You will get response within 10 - 180 secs period depending on service workload.
-   */
-  public async Solve(
-    task: TurnstileProxylessRequest,
-    resultTimeouts?: GetResultTimeouts,
-    cancellationController?: AbortController,
-  ): Promise<CaptchaResult<TurnstileResponse>>;
   /**
    * Solve Turnstile task
    * You will get response within 10 - 180 secs period depending on service workload.
@@ -382,6 +322,36 @@ export class CapMonsterCloudClient {
     resultTimeouts?: GetResultTimeouts,
     cancellationController?: AbortController,
   ): Promise<CaptchaResult<ComplexImageResponse>>;
+  /**
+   * Solve Prosopo task
+   * You will get response within 10 - 180 secs period depending on service workload.
+   */
+  public async Solve(
+    task: ProsopoRequest,
+    resultTimeouts?: GetResultTimeouts,
+    cancellationController?: AbortController,
+  ): Promise<CaptchaResult<ProsopoResponse>>;
+
+  /**
+   * Solve Yidun task
+   * You will get response within 10 - 180 secs period depending on service workload.
+   */
+  public async Solve(
+    task: YidunRequest,
+    resultTimeouts?: GetResultTimeouts,
+    cancellationController?: AbortController,
+  ): Promise<CaptchaResult<YidunResponse>>;
+
+  /**
+   * Solve MTCaptcha task
+   * You will get response within 10 - 180 secs period depending on service workload.
+   */
+  public async Solve(
+    task: MTCaptchaRequest,
+    resultTimeouts?: GetResultTimeouts,
+    cancellationController?: AbortController,
+  ): Promise<CaptchaResult<MTCaptchaResponse>>;
+
   /**
    * Solve Complex Image FunCaptcha Task
    * You will get response within 10 - 180 secs period depending on service workload.
