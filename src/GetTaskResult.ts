@@ -14,6 +14,7 @@ import { BasiliskResponse } from './Responses/BasiliskResponse';
 import { ImpervaResponse } from './Responses/ImpervaResponse';
 import { BinanceResponse } from './Responses/BinanceResponse';
 import { ComplexImageRecognitionResponse } from './Responses/ComplexImageRecognitionResponse';
+import { AltchaResponse } from './Responses/AltchaResponse';
 
 export enum TaskResultType {
   Failed = 'Failed',
@@ -45,7 +46,8 @@ export type TaskCompletedSolution =
   | BasiliskResponse
   | ImpervaResponse
   | BinanceResponse
-  | ComplexImageRecognitionResponse;
+  | ComplexImageRecognitionResponse
+  | AltchaResponse;
 
 export type TaskCompleted<S extends TaskCompletedSolution> = {
   type: TaskResultType.Completed;

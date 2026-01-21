@@ -1,0 +1,48 @@
+import { CaptchaRequestBase, CaptchaRequestBaseIn } from '../CaptchaRequestBase';
+
+export type RecaptchaV3EnterpriseRequestBaseIn = {
+  websiteURL: string;
+  websiteKey: string;
+  userAgent?: string;
+  minScore?: number;
+  pageAction?: string;
+} & CaptchaRequestBaseIn;
+
+/**
+ * Base Recaptcha V2 Enterprise recognition request
+ */
+export abstract class RecaptchaV3EnterpriseRequestBase extends CaptchaRequestBase {
+  /**
+   * Address of a webpage with Google ReCaptcha
+   */
+  public websiteURL!: string;
+
+  /**
+   * Recaptcha website key.
+   * @example
+   * <![CDATA[<div class="g-recaptcha" data-sitekey="THAT_ONE"></div>]]>
+   */
+  public websiteKey!: string;
+
+  /**
+   * Browser's User-Agent which is used in emulation.
+   * It is required that you use a signature of a modern browser,
+   * otherwise Google will ask you to "update your browser".
+   */
+  public userAgent?: string;
+
+  // The action name passed to grecaptcha.execute().
+  public pageAction?: string;
+
+  //  Can have a value from 0.1 to 0.9
+  public minScore?: number;
+
+  constructor({ type, nocache, websiteURL, websiteKey, userAgent, pageAction, minScore }: RecaptchaV3EnterpriseRequestBaseIn) {
+    super({ type, nocache });
+    this.websiteURL = websiteURL;
+    this.websiteKey = websiteKey;
+    this.userAgent = userAgent;
+    this.pageAction = pageAction;
+    this.minScore = minScore;
+  }
+}

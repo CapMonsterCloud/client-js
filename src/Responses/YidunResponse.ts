@@ -3,4 +3,5 @@
  */
 export type YidunResponse = {
   token: string;
+  userAgent: string;
 };

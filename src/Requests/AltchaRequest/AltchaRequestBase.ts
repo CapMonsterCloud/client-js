@@ -1,30 +1,23 @@
 import { CaptchaRequestBase, CaptchaRequestBaseIn } from '../CaptchaRequestBase';
 
-export type DataDomeRequestBaseIn = {
+export type AltchaRequestBaseIn = {
   websiteURL: string;
   userAgent?: string;
   _class: string;
-  metadata: MetadataWithHtml | MetadataCaptchaUrl;
+  metadata: Metadata;
 } & CaptchaRequestBaseIn;
 
-export type MetadataWithHtml = {
-  [key: string]: string | undefined;
-  htmlPageBase64: string;
-  datadomeCookie: string;
-  datadomeVersion?: string;
-};
-
-export type MetadataCaptchaUrl = {
-  [key: string]: string | undefined;
-  captchaUrl: string;
-  datadomeCookie: string;
-  datadomeVersion?: string;
+export type Metadata = {
+  challenge: string;
+  iterations: string;
+  salt: string;
+  signature: string;
 };
 
 /**
  * Base DataDome recognition request
  */
-export abstract class DataDomeRequestBase extends CaptchaRequestBase {
+export abstract class AltchaRequestBase extends CaptchaRequestBase {
   /**
    * Address of a webpage with DataDome.
    */
@@ -40,7 +33,7 @@ export abstract class DataDomeRequestBase extends CaptchaRequestBase {
    * You can take the link from the page with the captcha.
    * Often it looks like https://geo.captcha-delivery.com/captcha/?initialCid=...
    */
-  public metadata!: Record<string, string | undefined>;
+  public metadata!: Record<string, string>;
 
   /**
    * Browser User-Agent. Pass only the actual UA from Windows OS
@@ -52,7 +45,7 @@ export abstract class DataDomeRequestBase extends CaptchaRequestBase {
    */
   public class: string;
 
-  constructor({ type, nocache, websiteURL, userAgent, metadata, _class }: DataDomeRequestBaseIn) {
+  constructor({ type, nocache, websiteURL, userAgent, metadata, _class }: AltchaRequestBaseIn) {
     super({ type, nocache });
     this.websiteURL = websiteURL;
     this.metadata = metadata;

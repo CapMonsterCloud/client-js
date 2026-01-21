@@ -28,7 +28,7 @@ export type TurnstileRequestIn = (TurnstileTokenType | TurnstileCfClearanceType)
  * {@link https://zennolab.atlassian.net/wiki/spaces/APIS/pages/2313814017/TurnstileTask+Cloudflare+Challenge}
  */
 export class TurnstileRequest extends TurnstileRequestBase {
-  cloudflareTaskType?: 'token' | 'cf_clearance';
+  cloudflareTaskType?: 'token' | 'cf_clearance' | 'wait_room';
   userAgent?: string;
   pageAction?: string;
   htmlPageBase64?: string;
