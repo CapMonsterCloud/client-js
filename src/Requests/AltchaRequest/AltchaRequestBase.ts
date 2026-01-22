@@ -15,7 +15,7 @@ export type Metadata = {
 };
 
 /**
- * Base DataDome recognition request
+ * Base Altcha recognition request
  */
 export abstract class AltchaRequestBase extends CaptchaRequestBase {
   /**
@@ -24,16 +24,14 @@ export abstract class AltchaRequestBase extends CaptchaRequestBase {
   public websiteURL!: string;
 
   /**
-   * DataDome website key.
+   * Altcha website key.
    */
   public websiteKey!: string;
 
   /**
-   * The object that contains additional data about the captcha - captchaUrl: "captchaUrl": "..."
-   * You can take the link from the page with the captcha.
-   * Often it looks like https://geo.captcha-delivery.com/captcha/?initialCid=...
+   * The object that contains additional data about the captcha - challenge, iterations, salt, signature
    */
-  public metadata!: Record<string, string>;
+  public metadata!: Metadata;
 
   /**
    * Browser User-Agent. Pass only the actual UA from Windows OS

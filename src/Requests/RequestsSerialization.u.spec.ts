@@ -451,7 +451,7 @@ describe('Check unit tests for SerializeObject()', () => {
     expect(serialized).toMatchObject({
       clientKey: '<your capmonster.cloud API key>',
       task: {
-        type: 'RecaptchaV2EnterpriseTask',
+        type: 'RecaptchaV3EnterpriseTask',
         websiteURL: 'https://mydomain.com/page-with-recaptcha-enterprise',
         websiteKey: '6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd',
         minScore: 0.7,

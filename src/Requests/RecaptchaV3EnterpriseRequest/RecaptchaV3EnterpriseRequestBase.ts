@@ -19,8 +19,6 @@ export abstract class RecaptchaV3EnterpriseRequestBase extends CaptchaRequestBas
 
   /**
    * Recaptcha website key.
-   * @example
-   * <![CDATA[<div class="g-recaptcha" data-sitekey="THAT_ONE"></div>]]>
    */
   public websiteKey!: string;
 

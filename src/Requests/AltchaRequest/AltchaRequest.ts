@@ -6,7 +6,7 @@ export type AltchaRequestIn = Pick<AltchaRequestBaseIn, Exclude<keyof AltchaRequ
   proxy?: ProxyInfoIn;
 };
 /**
- * DataDome recognition request.
+ * Altcha recognition request.
  * {@link https://zenno.link/doc-altcha}
  */
 export class AltchaRequest extends AltchaRequestBase {

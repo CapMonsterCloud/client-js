@@ -7,12 +7,12 @@ export type RecaptchaV3EnterpriseRequestIn = Pick<
 >;
 
 /**
- * Recaptcha V2 Enterprise recognition request.
- * {@link https://zenno.link/doc-recaptcha2e-proxy-en}
+ * Recaptcha V3 Enterprise recognition request.
+ * {@link https://zenno.link/doc-recaptcha3e-proxy-en}
  */
 
 export class RecaptchaV3EnterpriseRequest extends RecaptchaV3EnterpriseRequestBase {
   constructor({ ...restArgsObj }: RecaptchaV3EnterpriseRequestIn) {
-    super({ type: TaskType.RecaptchaV2EnterpriseTask, ...restArgsObj });
+    super({ type: TaskType.RecaptchaV3EnterpriseTask, ...restArgsObj });
   }
 }
