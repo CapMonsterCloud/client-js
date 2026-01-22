@@ -9,7 +9,7 @@ export type RecaptchaV3EnterpriseRequestBaseIn = {
 } & CaptchaRequestBaseIn;
 
 /**
- * Base Recaptcha V2 Enterprise recognition request
+ * Base Recaptcha V3 Enterprise recognition request
  */
 export abstract class RecaptchaV3EnterpriseRequestBase extends CaptchaRequestBase {
   /**
@@ -18,7 +18,8 @@ export abstract class RecaptchaV3EnterpriseRequestBase extends CaptchaRequestBas
   public websiteURL!: string;
 
   /**
-   * Recaptcha website key.
+   * The ReCaptcha v3 site key on the target page.
+   * https://www.google.com/recaptcha/enterprise.js?render=THIS_ONE
    */
   public websiteKey!: string;
 
