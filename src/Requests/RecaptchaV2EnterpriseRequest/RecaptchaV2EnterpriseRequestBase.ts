@@ -6,6 +6,7 @@ export type RecaptchaV2EnterpriseRequestBaseIn = {
   enterprisePayload?: Record<string, unknown>;
   recaptchaDataSValue?: string;
   userAgent?: string;
+  pageAction?: string;
 } & CaptchaRequestBaseIn;
 
 /**
@@ -55,6 +56,9 @@ export abstract class RecaptchaV2EnterpriseRequestBase extends CaptchaRequestBas
    */
   public userAgent?: string;
 
+  // The action name passed to grecaptcha.execute().
+  public pageAction?: string;
+
   constructor({
     type,
     nocache,
@@ -63,6 +67,7 @@ export abstract class RecaptchaV2EnterpriseRequestBase extends CaptchaRequestBas
     enterprisePayload,
     recaptchaDataSValue,
     userAgent,
+    pageAction,
   }: RecaptchaV2EnterpriseRequestBaseIn) {
     super({ type, nocache });
     this.websiteURL = websiteURL;
@@ -70,5 +75,6 @@ export abstract class RecaptchaV2EnterpriseRequestBase extends CaptchaRequestBas
     this.enterprisePayload = enterprisePayload;
     this.recaptchaDataSValue = recaptchaDataSValue;
     this.userAgent = userAgent;
+    this.pageAction = pageAction;
   }
 }

@@ -6,6 +6,7 @@ import { HCaptchaRequest, HCaptchaRequestIn } from './Requests/HCaptchaRequest';
 import { ImageToTextRequest, ImageToTextRequestIn } from './Requests/ImageToTextRequest';
 import { RecaptchaV2EnterpriseRequest, RecaptchaV2EnterpriseRequestIn } from './Requests/RecaptchaV2EnterpriseRequest';
 import { RecaptchaV2Request, RecaptchaV2RequestIn } from './Requests/RecaptchaV2Request';
+import { RecaptchaV3EnterpriseRequest, RecaptchaV3EnterpriseRequestIn } from './Requests/RecaptchaV3EnterpriseRequest';
 import { RecaptchaV3ProxylessRequest, RecaptchaV3ProxylessRequestIn } from './Requests/RecaptchaV3ProxylessRequest';
 import { TurnstileRequest, TurnstileRequestIn } from './Requests/TurnstileRequest';
 import { CapMonsterModules } from './CapMonsterModules';
@@ -26,6 +27,7 @@ import { ProsopoRequest, ProsopoRequestIn } from './Requests/ProsopoRequest';
 import { TemuRequest, TemuRequestIn } from './Requests/TemuRequest';
 import { YidunRequest, YidunRequestIn } from './Requests/YidunRequest';
 import { MTCaptchaRequest, MTCaptchaRequestIn } from './Requests/MTCaptchaRequest';
+import { AltchaRequest, AltchaRequestIn } from './Requests/AltchaRequest';
 
 export default {
   CapMonsterCloudClientFactory,
@@ -52,6 +54,8 @@ export default {
   TemuRequest,
   YidunRequest,
   MTCaptchaRequest,
+  AltchaRequest,
+  RecaptchaV3EnterpriseRequest,
 };
 
 export {
@@ -105,4 +109,8 @@ export {
   YidunRequestIn,
   MTCaptchaRequest,
   MTCaptchaRequestIn,
+  AltchaRequest,
+  AltchaRequestIn,
+  RecaptchaV3EnterpriseRequest,
+  RecaptchaV3EnterpriseRequestIn,
 };

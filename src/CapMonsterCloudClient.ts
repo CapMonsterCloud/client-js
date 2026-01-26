@@ -53,6 +53,10 @@ import { YidunRequest } from './Requests/YidunRequest';
 import { YidunResponse } from './Responses/YidunResponse';
 import { MTCaptchaRequest } from './Requests/MTCaptchaRequest';
 import { MTCaptchaResponse } from './Responses/MTCaptchaResponse';
+import { AltchaRequest } from './Requests/AltchaRequest';
+import { AltchaResponse } from './Responses/AltchaResponse';
+import { RecaptchaV3EnterpriseRequest } from './Requests/RecaptchaV3EnterpriseRequest';
+import { RecaptchaV3EnterpriseResponse } from './Responses/RecaptchaV3EnterpriseResponse';
 
 type CustomTaskUnion = TemuRequest | BasiliskRequest | ImpervaRequest;
 
@@ -215,6 +219,15 @@ export class CapMonsterCloudClient {
     cancellationController?: AbortController,
   ): Promise<CaptchaResult<RecaptchaV2EnterpriseResponse>>;
   /**
+   * Solve RecaptchaV3EnterpriseTask task
+   * You will get response within 10 - 180 secs period depending on service workload.
+   */
+  public async Solve(
+    task: RecaptchaV3EnterpriseRequest,
+    resultTimeouts?: GetResultTimeouts,
+    cancellationController?: AbortController,
+  ): Promise<CaptchaResult<RecaptchaV3EnterpriseResponse>>;
+  /**
    * Solve NoCaptchaTask task
    * You will get response within 10 - 180 secs period depending on service workload.
    */
@@ -241,6 +254,15 @@ export class CapMonsterCloudClient {
     resultTimeouts?: GetResultTimeouts,
     cancellationController?: AbortController,
   ): Promise<CaptchaResult<DataDomeResponse>>;
+  /**
+   * Solve AltchaRequest task
+   * You will get response within 10 - 180 secs period depending on service workload.
+   */
+  public async Solve(
+    task: AltchaRequest,
+    resultTimeouts?: GetResultTimeouts,
+    cancellationController?: AbortController,
+  ): Promise<CaptchaResult<AltchaResponse>>;
   /**
    * Solve TenDI task
    * You will get response within 10 - 180 secs period depending on service workload.

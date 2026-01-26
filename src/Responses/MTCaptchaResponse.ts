@@ -3,4 +3,5 @@
  */
 export type MTCaptchaResponse = {
   token: string;
+  userAgent: string;
 };
