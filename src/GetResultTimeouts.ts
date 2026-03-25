@@ -29,6 +29,13 @@ export const RecaptchaV3Timeouts = {
   timeout: 1000 * 180,
 } as GetResultTimeouts;
 
+export const RecaptchaV3EnterpriseTimeouts = {
+  firstRequestDelay: 1000 * 1,
+  firstRequestNoCacheDelay: 1000 * 10,
+  requestsInterval: 1000 * 3,
+  timeout: 1000 * 180,
+} as GetResultTimeouts;
+
 export const ImageToTextTimeouts = {
   firstRequestDelay: 350,
   requestsInterval: 200,
@@ -128,6 +135,8 @@ export function detectResultTimeouts(task: Task): GetResultTimeouts {
       return RecaptchaV2Timeouts;
     case TaskType.RecaptchaV3TaskProxyless:
       return RecaptchaV3Timeouts;
+    case TaskType.RecaptchaV3EnterpriseTask:
+      return RecaptchaV3EnterpriseTimeouts;
     case TaskType.TurnstileTask:
       return TurnstileTimeouts;
     case TaskType.ComplexImageTask:

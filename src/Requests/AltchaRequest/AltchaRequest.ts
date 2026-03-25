@@ -10,6 +10,8 @@ export type AltchaRequestIn = Pick<AltchaRequestBaseIn, Exclude<keyof AltchaRequ
  * {@link https://zenno.link/doc-altcha}
  */
 export class AltchaRequest extends AltchaRequestBase {
+  public declare class: 'altcha';
+
   constructor({ proxy, ...argsObj }: AltchaRequestIn) {
     super({ type: TaskType.CustomTask, _class: 'altcha', ...argsObj });
 

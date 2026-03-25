@@ -9,6 +9,7 @@ import { ComplexImageHCaptchaRequest } from './ComplexImageHCaptchaRequest';
 import { ComplexImageRecaptchaRequest } from './ComplexImageRecaptchaRequest';
 import { ComplexImageFunCaptchaRequest } from './ComplexImageFunCaptchaRequest';
 import { DataDomeRequest } from './DataDomeRequest';
+import { AltchaRequest } from './AltchaRequest';
 import { TenDIRequest } from './TenDIRequest';
 import { BasiliskRequest } from './BasiliskRequest';
 import { ImpervaRequest } from './ImpervaRequest';
@@ -40,6 +41,7 @@ export type Task =
   | ComplexImageFunCaptchaRequest
   | TurnstileRequest
   | DataDomeRequest
+  | AltchaRequest
   | TenDIRequest
   | BasiliskRequest
   | ImpervaRequest
