@@ -10,6 +10,8 @@ export type BasiliskRequestIn = Pick<BasiliskRequestBaseIn, Exclude<keyof Basili
  * {@link https://zenno.link/doc-basilisk-en}
  */
 export class BasiliskRequest extends BasiliskRequestBase {
+  public declare class: 'Basilisk';
+
   constructor({ proxy, ...argsObj }: BasiliskRequestIn) {
     super({ type: TaskType.CustomTask, _class: 'Basilisk', ...argsObj });
 

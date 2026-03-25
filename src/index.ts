@@ -26,6 +26,9 @@ import { ProsopoRequest, ProsopoRequestIn } from './Requests/ProsopoRequest';
 import { TemuRequest, TemuRequestIn } from './Requests/TemuRequest';
 import { YidunRequest, YidunRequestIn } from './Requests/YidunRequest';
 import { MTCaptchaRequest, MTCaptchaRequestIn } from './Requests/MTCaptchaRequest';
+import { CastleRequest, CastleRequestIn } from './Requests/CastleRequest';
+import { TSPDRequest, TSPDRequestIn } from './Requests/TSPDRequest';
+import { HuntRequest, HuntRequestIn } from './Requests/HuntRequest';
 
 export default {
   CapMonsterCloudClientFactory,
@@ -52,6 +55,9 @@ export default {
   TemuRequest,
   YidunRequest,
   MTCaptchaRequest,
+  CastleRequest,
+  TSPDRequest,
+  HuntRequest,
 };
 
 export {
@@ -105,4 +111,10 @@ export {
   YidunRequestIn,
   MTCaptchaRequest,
   MTCaptchaRequestIn,
+  CastleRequest,
+  CastleRequestIn,
+  TSPDRequest,
+  TSPDRequestIn,
+  HuntRequest,
+  HuntRequestIn,
 };
