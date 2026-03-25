@@ -22,7 +22,7 @@ async function run() {
     websiteKey: '6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd',
   });
 
-  console.log(await cmcClient.Solve(recaptchaV2ProxylessRequest));
+  console.log(await cmcClient.Solve(recaptchaV2Request));
 }
 
 run()
@@ -87,12 +87,14 @@ DEBUG=cmc-* node app.js
 - [ProsopoRequest](https://zenno.link/doc-prosopo-en)
 - [RecaptchaComplexImageTaskRequest](https://zenno.link/doc-complextask-rc-en)
 - [RecaptchaV2EnterpriseRequest](https://zenno.link/doc-recaptcha2e-proxy-en)
+- [RecaptchaV3EnterpriseRequest](https://zenno.link/doc-recaptcha3e-proxy-en)
 - [RecaptchaV2Request](https://zenno.link/doc-recaptcha2-proxy-en)
 - [RecaptchaV3ProxylessRequest](https://zenno.link/doc-recaptcha3-en)
 - [Temu](https://zenno.link/doc-temu-en)
 - [TenDIRequest](https://zenno.link/doc-tendi-en)
 - [TurnstileRequest](https://zenno.link/doc-turnstile-proxy-en)
 - [Yidun](https://zenno.link/doc-yidun-en)
+- [Altcha](https://zenno.link/doc-altcha-en)
 - [Castle](https://zenno.link/castle-en)
 - [TSPD](https://zenno.link/tspd-en)
 - [Hunt](https://zenno.link/hunt-en)

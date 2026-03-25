@@ -5,6 +5,7 @@ export enum TaskType {
   HCaptchaTask = 'HCaptchaTask',
   ImageToTextTask = 'ImageToTextTask',
   RecaptchaV2EnterpriseTask = 'RecaptchaV2EnterpriseTask',
+  RecaptchaV3EnterpriseTask = 'RecaptchaV3EnterpriseTask',
   NoCaptchaTaskProxyless = 'NoCaptchaTaskProxyless',
   NoCaptchaTask = 'NoCaptchaTask',
   RecaptchaV3TaskProxyless = 'RecaptchaV3TaskProxyless',

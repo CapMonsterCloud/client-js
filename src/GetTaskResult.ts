@@ -14,6 +14,7 @@ import { BasiliskResponse } from './Responses/BasiliskResponse';
 import { ImpervaResponse } from './Responses/ImpervaResponse';
 import { BinanceResponse } from './Responses/BinanceResponse';
 import { ComplexImageRecognitionResponse } from './Responses/ComplexImageRecognitionResponse';
+import { AltchaResponse } from './Responses/AltchaResponse';
 import { CastleResponse } from './Responses/CastleResponse';
 import { TSPDResponse } from './Responses/TSPDResponse';
 import { HuntResponse } from './Responses/HuntResponse';
@@ -49,6 +50,7 @@ export type TaskCompletedSolution =
   | ImpervaResponse
   | BinanceResponse
   | ComplexImageRecognitionResponse
+  | AltchaResponse
   | CastleResponse
   | TSPDResponse
   | HuntResponse;

@@ -7,12 +7,14 @@ import { RecaptchaV3ProxylessRequest } from './RecaptchaV3ProxylessRequest';
 import { FunCaptchaRequest } from './FunCaptchaRequest';
 import { HCaptchaRequest } from './HCaptchaRequest';
 import { GeeTestRequest } from './GeeTestRequest';
-import { TenDIRequest } from './TenDIRequest/TenDIRequest';
+import { TenDIRequest } from './TenDIRequest';
 import { RecaptchaV2EnterpriseRequest } from './RecaptchaV2EnterpriseRequest';
 import { ComplexImageHCaptchaRequest } from './ComplexImageHCaptchaRequest';
 import { ComplexImageRecaptchaRequest } from './ComplexImageRecaptchaRequest';
 import { ComplexImageFunCaptchaRequest } from './ComplexImageFunCaptchaRequest';
 import { AmazonRequest } from './AmazonRequest';
+import { AltchaRequest } from './AltchaRequest';
+import { RecaptchaV3EnterpriseRequest } from './RecaptchaV3EnterpriseRequest';
 
 describe('Check unit tests for SerializeObject()', () => {
   it(`should serialize RecaptchaV2ProxylessRequest`, () => {
@@ -405,6 +407,7 @@ describe('Check unit tests for SerializeObject()', () => {
         enterprisePayload: {
           s: 'SOME_ADDITIONAL_TOKEN',
         },
+        pageAction: 'login',
         proxy: {
           proxyType: 'http',
           proxyAddress: '8.8.8.8',
@@ -430,6 +433,29 @@ describe('Check unit tests for SerializeObject()', () => {
         proxyLogin: 'proxyLoginHere',
         proxyPassword: 'proxyPasswordHere',
         userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.132 Safari/537.36',
+      },
+    });
+  });
+
+  it(`should serialize RecaptchaV3EnterpriseProxylessRequest`, () => {
+    const serialized = SerializeObject({
+      clientKey: '<your capmonster.cloud API key>',
+      task: new RecaptchaV3EnterpriseRequest({
+        websiteURL: 'https://mydomain.com/page-with-recaptcha-enterprise',
+        websiteKey: '6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd',
+        minScore: 0.7,
+        pageAction: 'login',
+      }),
+    });
+
+    expect(serialized).toMatchObject({
+      clientKey: '<your capmonster.cloud API key>',
+      task: {
+        type: 'RecaptchaV3EnterpriseTask',
+        websiteURL: 'https://mydomain.com/page-with-recaptcha-enterprise',
+        websiteKey: '6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd',
+        minScore: 0.7,
+        pageAction: 'login',
       },
     });
   });
@@ -529,6 +555,7 @@ describe('Check unit tests for SerializeObject()', () => {
         metadata: {
           captchaUrl: 'https://geo.captcha-delivery.com/captcha/?initialCid=12434324',
           datadomeCookie: '',
+          datadomeVersion: 'new',
         },
       }),
     });
@@ -543,6 +570,7 @@ describe('Check unit tests for SerializeObject()', () => {
         metadata: {
           captchaUrl: 'https://geo.captcha-delivery.com/captcha/?initialCid=12434324',
           datadomeCookie: '',
+          datadomeVersion: 'new',
         },
       },
     });
@@ -578,6 +606,82 @@ describe('Check unit tests for SerializeObject()', () => {
         metadata: {
           captchaUrl: 'https://geo.captcha-delivery.com/captcha/?initialCid=12434324',
           datadomeCookie: '',
+        },
+        proxyType: 'socks4',
+        proxyAddress: 'https://proxy.com',
+        proxyPort: 6045,
+        proxyLogin: 'login',
+        proxyPassword: 'p@ssword',
+      },
+    });
+  });
+
+  it(`should serialize AltchaRequest`, () => {
+    const serialized = SerializeObject({
+      clientKey: '<your capmonster.cloud API key>',
+      task: new AltchaRequest({
+        websiteURL: 'site.com',
+        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        metadata: {
+          challenge: '3dd28253be6cc0c54d95f7f98c517e68744597cc6e66109619d1ac975c39181c',
+          iterations: '5000',
+          salt: '46d5b1c8871e5152d902ee3f?edk=1493462145de1ce33a52fb569b27a364&codeChallenge=464Cjs7PbiJJhJZ_ReJ-y9UGGDndcpsnP6vS8x1nEJyTkhjQkJyL2jcnYEuMKcrG&expires=1761048664',
+          signature: '4b1cf0e0be0f4e5247e50b0f9a449830f1fbca44c32ff94bc080146815f31a18',
+        },
+      }),
+    });
+
+    expect(serialized).toMatchObject({
+      clientKey: '<your capmonster.cloud API key>',
+      task: {
+        type: 'CustomTask',
+        class: 'altcha',
+        websiteURL: 'site.com',
+        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        metadata: {
+          challenge: '3dd28253be6cc0c54d95f7f98c517e68744597cc6e66109619d1ac975c39181c',
+          iterations: '5000',
+          salt: '46d5b1c8871e5152d902ee3f?edk=1493462145de1ce33a52fb569b27a364&codeChallenge=464Cjs7PbiJJhJZ_ReJ-y9UGGDndcpsnP6vS8x1nEJyTkhjQkJyL2jcnYEuMKcrG&expires=1761048664',
+          signature: '4b1cf0e0be0f4e5247e50b0f9a449830f1fbca44c32ff94bc080146815f31a18',
+        },
+      },
+    });
+  });
+
+  it(`should serialize AltchaRequest with proxy`, () => {
+    const serialized = SerializeObject({
+      clientKey: '<your capmonster.cloud API key>',
+      task: new AltchaRequest({
+        websiteURL: 'site.com',
+        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        metadata: {
+          challenge: '3dd28253be6cc0c54d95f7f98c517e68744597cc6e66109619d1ac975c39181c',
+          iterations: '5000',
+          salt: '46d5b1c8871e5152d902ee3f?edk=1493462145de1ce33a52fb569b27a364&codeChallenge=464Cjs7PbiJJhJZ_ReJ-y9UGGDndcpsnP6vS8x1nEJyTkhjQkJyL2jcnYEuMKcrG&expires=1761048664',
+          signature: '4b1cf0e0be0f4e5247e50b0f9a449830f1fbca44c32ff94bc080146815f31a18',
+        },
+        proxy: {
+          proxyType: 'socks4',
+          proxyAddress: 'https://proxy.com',
+          proxyPort: 6045,
+          proxyLogin: 'login',
+          proxyPassword: 'p@ssword',
+        },
+      }),
+    });
+
+    expect(serialized).toMatchObject({
+      clientKey: '<your capmonster.cloud API key>',
+      task: {
+        type: 'CustomTask',
+        class: 'altcha',
+        websiteURL: 'site.com',
+        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        metadata: {
+          challenge: '3dd28253be6cc0c54d95f7f98c517e68744597cc6e66109619d1ac975c39181c',
+          iterations: '5000',
+          salt: '46d5b1c8871e5152d902ee3f?edk=1493462145de1ce33a52fb569b27a364&codeChallenge=464Cjs7PbiJJhJZ_ReJ-y9UGGDndcpsnP6vS8x1nEJyTkhjQkJyL2jcnYEuMKcrG&expires=1761048664',
+          signature: '4b1cf0e0be0f4e5247e50b0f9a449830f1fbca44c32ff94bc080146815f31a18',
         },
         proxyType: 'socks4',
         proxyAddress: 'https://proxy.com',

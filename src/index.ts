@@ -6,6 +6,7 @@ import { HCaptchaRequest, HCaptchaRequestIn } from './Requests/HCaptchaRequest';
 import { ImageToTextRequest, ImageToTextRequestIn } from './Requests/ImageToTextRequest';
 import { RecaptchaV2EnterpriseRequest, RecaptchaV2EnterpriseRequestIn } from './Requests/RecaptchaV2EnterpriseRequest';
 import { RecaptchaV2Request, RecaptchaV2RequestIn } from './Requests/RecaptchaV2Request';
+import { RecaptchaV3EnterpriseRequest, RecaptchaV3EnterpriseRequestIn } from './Requests/RecaptchaV3EnterpriseRequest';
 import { RecaptchaV3ProxylessRequest, RecaptchaV3ProxylessRequestIn } from './Requests/RecaptchaV3ProxylessRequest';
 import { TurnstileRequest, TurnstileRequestIn } from './Requests/TurnstileRequest';
 import { CapMonsterModules } from './CapMonsterModules';
@@ -29,6 +30,7 @@ import { MTCaptchaRequest, MTCaptchaRequestIn } from './Requests/MTCaptchaReques
 import { CastleRequest, CastleRequestIn } from './Requests/CastleRequest';
 import { TSPDRequest, TSPDRequestIn } from './Requests/TSPDRequest';
 import { HuntRequest, HuntRequestIn } from './Requests/HuntRequest';
+import { AltchaRequest, AltchaRequestIn } from './Requests/AltchaRequest';
 
 export default {
   CapMonsterCloudClientFactory,
@@ -58,6 +60,8 @@ export default {
   CastleRequest,
   TSPDRequest,
   HuntRequest,
+  AltchaRequest,
+  RecaptchaV3EnterpriseRequest,
 };
 
 export {
@@ -117,4 +121,8 @@ export {
   TSPDRequestIn,
   HuntRequest,
   HuntRequestIn,
+  AltchaRequest,
+  AltchaRequestIn,
+  RecaptchaV3EnterpriseRequest,
+  RecaptchaV3EnterpriseRequestIn,
 };

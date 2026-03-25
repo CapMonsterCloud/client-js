@@ -2,8 +2,9 @@
  * Turnstile recognition response
  */
 export type TurnstileResponse = {
-    /**
-     * Captcha answer
-     */
-    token: string;
-  };
+  /**
+   * Captcha answer
+   */
+  token: string;
+  userAgent: string;
+};

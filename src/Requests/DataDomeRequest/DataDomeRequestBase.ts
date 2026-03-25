@@ -8,15 +8,17 @@ export type DataDomeRequestBaseIn = {
 } & CaptchaRequestBaseIn;
 
 export type MetadataWithHtml = {
-  [key: string]: string;
+  [key: string]: string | undefined;
   htmlPageBase64: string;
   datadomeCookie: string;
+  datadomeVersion?: string;
 };
 
 export type MetadataCaptchaUrl = {
-  [key: string]: string;
+  [key: string]: string | undefined;
   captchaUrl: string;
   datadomeCookie: string;
+  datadomeVersion?: string;
 };
 
 /**
@@ -38,7 +40,7 @@ export abstract class DataDomeRequestBase extends CaptchaRequestBase {
    * You can take the link from the page with the captcha.
    * Often it looks like https://geo.captcha-delivery.com/captcha/?initialCid=...
    */
-  public metadata!: Record<string, string>;
+  public metadata!: Record<string, string | undefined>;
 
   /**
    * Browser User-Agent. Pass only the actual UA from Windows OS

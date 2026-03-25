@@ -3,4 +3,5 @@
  */
 export type ProsopoResponse = {
   token: string;
+  userAgent: string;
 };
