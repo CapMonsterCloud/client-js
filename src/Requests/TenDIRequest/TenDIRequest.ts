@@ -8,6 +8,8 @@ export type TenDIRequestIn = Pick<TenDIRequestBaseIn, Exclude<keyof TenDIRequest
  * {@link https://zenno.link/doc-tendi}
  */
 export class TenDIRequest extends TenDIRequestBase {
+  public declare class: 'TenDI';
+
   constructor({ proxy, ...argsObj }: TenDIRequestIn) {
     super({ type: TaskType.CustomTask, _class: 'TenDI', ...argsObj });
 

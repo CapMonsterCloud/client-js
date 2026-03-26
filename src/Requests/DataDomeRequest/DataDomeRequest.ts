@@ -10,6 +10,8 @@ export type DataDomeRequestIn = Pick<DataDomeRequestBaseIn, Exclude<keyof DataDo
  * {@link https://zenno.link/doc-datadome}
  */
 export class DataDomeRequest extends DataDomeRequestBase {
+  public declare class: 'DataDome';
+
   constructor({ proxy, ...argsObj }: DataDomeRequestIn) {
     super({ type: TaskType.CustomTask, _class: 'DataDome', ...argsObj });
 

@@ -8,6 +8,8 @@ export type ImpervaRequestIn = Pick<ImpervaRequestBaseIn, Exclude<keyof ImpervaR
  * {@link https://zenno.link/doc-imperva-en}
  */
 export class ImpervaRequest extends ImpervaRequestBase {
+  public declare class: 'Imperva';
+
   constructor({ proxy, ...argsObj }: ImpervaRequestIn) {
     super({ type: TaskType.CustomTask, _class: 'Imperva', ...argsObj });
     Object.assign(this, new ProxyInfo(proxy));

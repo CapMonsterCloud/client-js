@@ -10,6 +10,8 @@ export type TemuRequestIn = Pick<TemuRequestBaseIn, Exclude<keyof TemuRequestBas
  * {@link https://zenno.link/doc-temu-en}
  */
 export class TemuRequest extends TemuRequestBase {
+  public declare class: 'Temu';
+
   constructor({ proxy, ...argsObj }: TemuRequestIn) {
     super({ type: TaskType.CustomTask, _class: 'Temu', ...argsObj });
 

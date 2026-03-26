@@ -57,16 +57,12 @@ import { AltchaRequest } from './Requests/AltchaRequest';
 import { AltchaResponse } from './Responses/AltchaResponse';
 import { RecaptchaV3EnterpriseRequest } from './Requests/RecaptchaV3EnterpriseRequest';
 import { RecaptchaV3EnterpriseResponse } from './Responses/RecaptchaV3EnterpriseResponse';
-
-type CustomTaskUnion = TemuRequest | BasiliskRequest | ImpervaRequest;
-
-type ResponseForCustomTask<T> = T extends TemuRequest
-  ? TemuResponse
-  : T extends BasiliskRequest
-  ? BasiliskResponse
-  : T extends ImpervaRequest
-  ? ImpervaResponse
-  : never;
+import { CastleRequest } from './Requests/CastleRequest';
+import { CastleResponse } from './Responses/CastleResponse';
+import { TSPDRequest } from './Requests/TSPDRequest';
+import { TSPDResponse } from './Responses/TSPDResponse';
+import { HuntRequest } from './Requests/HuntRequest';
+import { HuntResponse } from './Responses/HuntResponse';
 
 /**
  * Base type for capmonster.cloud Client exceptions
@@ -264,6 +260,42 @@ export class CapMonsterCloudClient {
     cancellationController?: AbortController,
   ): Promise<CaptchaResult<AltchaResponse>>;
   /**
+   * Solve Basilisk task
+   * You will get response within 10 - 180 secs period depending on service workload.
+   */
+  public async Solve(
+    task: BasiliskRequest,
+    resultTimeouts?: GetResultTimeouts,
+    cancellationController?: AbortController,
+  ): Promise<CaptchaResult<BasiliskResponse>>;
+  /**
+   * Solve Imperva task
+   * You will get response within 10 - 180 secs period depending on service workload.
+   */
+  public async Solve(
+    task: ImpervaRequest,
+    resultTimeouts?: GetResultTimeouts,
+    cancellationController?: AbortController,
+  ): Promise<CaptchaResult<ImpervaResponse>>;
+  /**
+   * Solve Temu task
+   * You will get response within 10 - 180 secs period depending on service workload.
+   */
+  public async Solve(
+    task: TemuRequest,
+    resultTimeouts?: GetResultTimeouts,
+    cancellationController?: AbortController,
+  ): Promise<CaptchaResult<TemuResponse>>;
+  /**
+   * Solve Castle task
+   * You will get response within 10 - 180 secs period depending on service workload.
+   */
+  public async Solve(
+    task: CastleRequest,
+    resultTimeouts?: GetResultTimeouts,
+    cancellationController?: AbortController,
+  ): Promise<CaptchaResult<CastleResponse>>;
+  /**
    * Solve TenDI task
    * You will get response within 10 - 180 secs period depending on service workload.
    */
@@ -273,14 +305,23 @@ export class CapMonsterCloudClient {
     cancellationController?: AbortController,
   ): Promise<CaptchaResult<TenDIResponse>>;
   /**
-   * Solve CustomTask task
+   * Solve Hunt task
    * You will get response within 10 - 180 secs period depending on service workload.
    */
-  public async Solve<T extends CustomTaskUnion>(
-    task: T,
+  public async Solve(
+    task: HuntRequest,
     resultTimeouts?: GetResultTimeouts,
     cancellationController?: AbortController,
-  ): Promise<CaptchaResult<ResponseForCustomTask<T>>>;
+  ): Promise<CaptchaResult<HuntResponse>>;
+  /**
+   * Solve TSPD task
+   * You will get response within 10 - 180 secs period depending on service workload.
+   */
+  public async Solve(
+    task: TSPDRequest,
+    resultTimeouts?: GetResultTimeouts,
+    cancellationController?: AbortController,
+  ): Promise<CaptchaResult<TSPDResponse>>;
   /**
    * Solve Binance task
    * You will get response within 10 - 180 secs period depending on service workload.

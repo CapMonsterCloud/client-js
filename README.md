@@ -95,3 +95,6 @@ DEBUG=cmc-* node app.js
 - [TurnstileRequest](https://zenno.link/doc-turnstile-proxy-en)
 - [Yidun](https://zenno.link/doc-yidun-en)
 - [Altcha](https://zenno.link/doc-altcha-en)
+- [Castle](https://zenno.link/castle-en)
+- [TSPD](https://zenno.link/tspd-en)
+- [Hunt](https://zenno.link/hunt-en)
