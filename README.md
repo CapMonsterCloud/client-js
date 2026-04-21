@@ -2,7 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/%40zennolab_com%2Fcapmonstercloud-client)](https://www.npmjs.com/package/@zennolab_com/capmonstercloud-client)
 
-Official JavaScript / Node.js client for creating CAPTCHA tasks and receiving solutions from the CapMonster Cloud API.
+Official JavaScript and Node.js SDK for the CapMonster Cloud API.
 
 ## Links
 
@@ -18,7 +18,7 @@ Official JavaScript / Node.js client for creating CAPTCHA tasks and receiving so
 npm i @zennolab_com/capmonstercloud-client
 ```
 
-## Usage with Node (with or without Typescript)
+## Minimal example (Node.js / TypeScript)
 
 ```javascript
 const { CapMonsterCloudClientFactory, ClientOptions, RecaptchaV2Request } = require('@zennolab_com/capmonstercloud-client');
