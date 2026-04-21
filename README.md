@@ -1,12 +1,20 @@
-# Zennolab CapMonsterCloud JS Client
+# CapMonster Cloud JavaScript client
 
-Official JS client library for [capmonster.cloud](https://capmonster.cloud/) captcha recognition service
+[![npm version](https://img.shields.io/npm/v/%40zennolab_com%2Fcapmonstercloud-client)](https://www.npmjs.com/package/@zennolab_com/capmonstercloud-client)
+
+Official JavaScript / Node.js client for creating CAPTCHA tasks and receiving solutions from the CapMonster Cloud API.
+
+## Links
+
+- Package: [@zennolab_com/capmonstercloud-client](https://www.npmjs.com/package/@zennolab_com/capmonstercloud-client)
+- Documentation: [docs.capmonster.cloud](https://docs.capmonster.cloud/)
+- Dashboard / API key: [dash.capmonster.cloud](https://dash.capmonster.cloud/)
 
 ## Installation
 
-Via [NPM](https://www.npmjs.com/package/@zennolab_com/capmonstercloud-client):
-
-    npm i @zennolab_com/capmonstercloud-client
+```bash
+npm i @zennolab_com/capmonstercloud-client
+```
 
 ## Usage with Node (with or without Typescript)
 
@@ -35,6 +43,8 @@ run()
     process.exit(1);
   });
 ```
+
+Supported task families include reCAPTCHA, GeeTest, Turnstile, image-to-text, and additional task types documented in the public docs.
 
 ## Usage with Browser (with or without Typescript)
 
