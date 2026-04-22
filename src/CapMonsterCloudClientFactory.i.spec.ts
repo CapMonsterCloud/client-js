@@ -5,7 +5,6 @@ import { ClientOptions } from './ClientOptions';
 import { ErrorType } from './ErrorType';
 import { RecaptchaV2Request } from './Requests/RecaptchaV2Request';
 import { ComplexImageRecaptchaRequest } from './Requests/ComplexImageRecaptchaRequest';
-import { ComplexImageHCaptchaRequest } from './Requests/ComplexImageHCaptchaRequest';
 import { ComplexImageFunCaptchaRequest } from './Requests/ComplexImageFunCaptchaRequest';
 import { TenDIRequest } from './Requests/TenDIRequest';
 
@@ -14,7 +13,6 @@ import { ImpervaRequest } from './Requests/ImpervaRequest';
 import { BinanceRequest } from './Requests/BinanceRequest';
 import { ComplexImageTaskRecognitionRequest } from './Requests/ComplexImageTaskRecognitionRequest';
 import { AmazonRequest } from './Requests/AmazonRequest';
-import { HCaptchaRequest } from './Requests/HCaptchaRequest';
 import { ProsopoRequest } from './Requests/ProsopoRequest';
 import { TemuRequest } from './Requests/TemuRequest';
 import { YidunRequest } from './Requests/YidunRequest';
@@ -86,44 +84,6 @@ describe('Check integration tests for CapMonsterCloudClientFactory()', () => {
     expect(srv.caughtRequests[1]).toHaveProperty('body', '{"clientKey":"<your capmonster.cloud API key>","taskId":7654321}');
     expect(task).toHaveProperty('solution');
     expect(task).toHaveProperty('solution.gRecaptchaResponse', 'answer');
-
-    expect(await srv.destroy()).toBeUndefined();
-  });
-
-  it('should call createTask and getTaskResult methods with specified objects for HCaptcha', async () => {
-    expect.assertions(7);
-
-    const srv = await createServerMock({
-      responses: [
-        { responseBody: '{"errorId":0,"taskId":7654321}' },
-        {
-          responseBody:
-            '{"errorId":0,"status":"ready","solution":{"gRecaptchaResponse":"answer", "userAgent": "userAgent", "respKey": "respKey"}}',
-        },
-      ],
-    });
-
-    const cmcClient = CapMonsterCloudClientFactory.Create(
-      new ClientOptions({ clientKey: '<your capmonster.cloud API key>', serviceUrl: `http://localhost:${srv.address.port}` }),
-    );
-
-    const HRecaptachRequest = new HCaptchaRequest({
-      websiteURL: 'https://lessons.zennolab.com/captchas/hcaptcha/?level=easy',
-      websiteKey: '6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd',
-      fallbackToActualUA: true,
-    });
-
-    const task = await cmcClient.Solve(HRecaptachRequest);
-
-    expect(srv.caughtRequests[0]).toHaveProperty(
-      'body',
-      '{"clientKey":"<your capmonster.cloud API key>","task":{"type":"HCaptchaTask","websiteURL":"https://lessons.zennolab.com/captchas/hcaptcha/?level=easy","websiteKey":"6Lcg7CMUAAAAANphynKgn9YAgA4tQ2KI_iqRyTwd","fallbackToActualUA":true},"softId":54}',
-    );
-    expect(srv.caughtRequests[1]).toHaveProperty('body', '{"clientKey":"<your capmonster.cloud API key>","taskId":7654321}');
-    expect(task).toHaveProperty('solution');
-    expect(task).toHaveProperty('solution.gRecaptchaResponse', 'answer');
-    expect(task).toHaveProperty('solution.userAgent', 'userAgent');
-    expect(task).toHaveProperty('solution.respKey', 'respKey');
 
     expect(await srv.destroy()).toBeUndefined();
   });
@@ -470,40 +430,6 @@ describe('Check integration tests for CapMonsterCloudClientFactory()', () => {
     expect(await srv.destroy()).toBeUndefined();
   });
 
-  it('should solve Complex Image HCaptcha Task', async () => {
-    expect.assertions(5);
-
-    const srv = await createServerMock({
-      responses: [
-        { responseBody: '{"errorId":0,"taskId":1234567}' },
-        { responseBody: '{"errorId":0,"status":"ready","solution":{"answer":[true, false]}}' },
-      ],
-    });
-
-    const cmcClient = CapMonsterCloudClientFactory.Create(
-      new ClientOptions({ clientKey: '<your capmonster.cloud API key>', serviceUrl: `http://localhost:${srv.address.port}` }),
-    );
-
-    const complexImageHCaptchaRequest = new ComplexImageHCaptchaRequest({
-      imageUrls: ['https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg'],
-      metaData: {
-        Task: 'Please click each image containing a mountain',
-      },
-      websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle',
-    });
-
-    const task = await cmcClient.Solve(complexImageHCaptchaRequest);
-
-    expect(srv.caughtRequests[0]).toHaveProperty(
-      'body',
-      '{"clientKey":"<your capmonster.cloud API key>","task":{"type":"ComplexImageTask","class":"hcaptcha","imageUrls":["https://i.postimg.cc/yYjg75Kv/payloadtraffic.jpg"],"metadata":{"Task":"Please click each image containing a mountain"},"websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle"},"softId":54}',
-    );
-    expect(srv.caughtRequests[1]).toHaveProperty('body', '{"clientKey":"<your capmonster.cloud API key>","taskId":1234567}');
-    expect(task).toHaveProperty('solution');
-    expect(task).toHaveProperty('solution.answer', [true, false]);
-
-    expect(await srv.destroy()).toBeUndefined();
-  });
 
   it('should solve Complex Image FunCaptcha Task', async () => {
     expect.assertions(5);

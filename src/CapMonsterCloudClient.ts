@@ -14,8 +14,6 @@ import { FunCaptchaResponse } from './Responses/FunCaptchaResponse';
 import { FunCaptchaRequest } from './Requests/FunCaptchaRequest';
 import { GeeTestResponse } from './Responses/GeeTestResponse';
 import { GeeTestRequest } from './Requests/GeeTestRequest';
-import { HCaptchaResponse } from './Responses/HCaptchaResponse';
-import { HCaptchaRequest } from './Requests/HCaptchaRequest';
 import { TurnstileRequest } from './Requests/TurnstileRequest';
 import { ImageToTextRequest } from './Requests/ImageToTextRequest';
 import { ImageToTextResponse } from './Responses/ImageToTextResponse';
@@ -29,7 +27,6 @@ import { TurnstileResponse } from './Responses/TurnstileResponse';
 import { SerializeObject } from './Requests/RequestsSerialization';
 import { ComplexImageRecaptchaRequest } from './Requests/ComplexImageRecaptchaRequest';
 import { ComplexImageResponse } from './Responses/ComplexImageResponse';
-import { ComplexImageHCaptchaRequest } from './Requests/ComplexImageHCaptchaRequest';
 import { ComplexImageFunCaptchaRequest } from './Requests/ComplexImageFunCaptchaRequest';
 import { DataDomeResponse } from './Responses/DataDomeResponse';
 import { DataDomeRequest } from './Requests/DataDomeRequest';
@@ -187,15 +184,6 @@ export class CapMonsterCloudClient {
     cancellationController?: AbortController,
   ): Promise<CaptchaResult<GeeTestResponse>>;
 
-  /**
-   * Solve HCaptchaTask task
-   * You will get response within 10 - 180 secs period depending on service workload.
-   */
-  public async Solve(
-    task: HCaptchaRequest,
-    resultTimeouts?: GetResultTimeouts,
-    cancellationController?: AbortController,
-  ): Promise<CaptchaResult<HCaptchaResponse>>;
   /**
    * Solve ImageToText task
    * You will get response within 300ms to 6s period depending on service workload.
@@ -373,15 +361,6 @@ export class CapMonsterCloudClient {
    */
   public async Solve(
     task: ComplexImageRecaptchaRequest,
-    resultTimeouts?: GetResultTimeouts,
-    cancellationController?: AbortController,
-  ): Promise<CaptchaResult<ComplexImageResponse>>;
-  /**
-   * Solve Complex Image HCaptcha Task
-   * You will get response within 10 - 180 secs period depending on service workload.
-   */
-  public async Solve(
-    task: ComplexImageHCaptchaRequest,
     resultTimeouts?: GetResultTimeouts,
     cancellationController?: AbortController,
   ): Promise<CaptchaResult<ComplexImageResponse>>;

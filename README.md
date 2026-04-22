@@ -93,7 +93,6 @@ DEBUG=cmc-* node app.js
 - [BinanceRequest](https://zenno.link/doc-binance-en)
 - [DataDomeRequest](https://zenno.link/doc-datadome-en)
 - [GeeTestRequest](https://zenno.link/doc-geetest-proxy-en)
-- [HcaptchaComplexImageTaskRequest](https://zenno.link/doc-complextask-hc-en)
 - [ImageToTextRequest](https://zenno.link/doc-ImageToTextTask-en)
 - [ImpervaRequest](https://zenno.link/doc-imperva-en)
 - [MTCaptcha](https://zenno.link/doc-mt-captcha-en)

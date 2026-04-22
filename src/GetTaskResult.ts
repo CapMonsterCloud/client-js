@@ -1,7 +1,6 @@
 import { ErrorType } from './ErrorType';
 import { FunCaptchaResponse } from './Responses/FunCaptchaResponse';
 import { GeeTestResponse } from './Responses/GeeTestResponse';
-import { HCaptchaResponse } from './Responses/HCaptchaResponse';
 import { ImageToTextResponse } from './Responses/ImageToTextResponse';
 import { RecaptchaV2EnterpriseResponse } from './Responses/RecaptchaV2EnterpriseResponse';
 import { RecaptchaV2Response } from './Responses/RecaptchaV2Response';
@@ -37,7 +36,6 @@ export type TaskFailed = {
 export type TaskCompletedSolution =
   | FunCaptchaResponse
   | GeeTestResponse
-  | HCaptchaResponse
   | ImageToTextResponse
   | RecaptchaV2EnterpriseResponse
   | RecaptchaV2Response
