@@ -1,8 +1,9 @@
-# CapMonster Cloud JavaScript client
+# CapMonster Cloud JavaScript SDK
 
 [![npm version](https://img.shields.io/npm/v/%40zennolab_com%2Fcapmonstercloud-client)](https://www.npmjs.com/package/@zennolab_com/capmonstercloud-client)
 
 Official JavaScript and Node.js SDK for the CapMonster Cloud API.
+Use this package when you want to create tasks, poll for results, and integrate CapMonster Cloud from Node.js or browser-based apps.
 
 ## Links
 
@@ -10,13 +11,13 @@ Official JavaScript and Node.js SDK for the CapMonster Cloud API.
 - Documentation: [docs.capmonster.cloud](https://docs.capmonster.cloud/)
 - Dashboard / API key: [dash.capmonster.cloud](https://dash.capmonster.cloud/)
 
-💵 Want to test before depositing? Contact support and we’ll add trial credits to your account.
-
 ## Installation
 
 ```bash
 npm i @zennolab_com/capmonstercloud-client
 ```
+
+Need to test before depositing? Contact support and we’ll add trial credits to your account.
 
 ## Minimal example (Node.js / TypeScript)
 
