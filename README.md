@@ -1,3 +1,7 @@
+✅ CapMonster.Cloud — Fast, Reliable CAPTCHA Solving for Automation & Scraping
+
+[![CapMonster Cloud](https://help.zennolab.com/upload/u/e4/e4bc15839b25.png)](https://capmonster.cloud/en/?utm_source=github&utm_campaign=cmcrep)
+
 # CapMonster Cloud JavaScript SDK
 
 [![npm version](https://img.shields.io/npm/v/%40zennolab_com%2Fcapmonstercloud-client)](https://www.npmjs.com/package/@zennolab_com/capmonstercloud-client)
@@ -8,8 +12,8 @@ Use this package when you want to create tasks, poll for results, and integrate 
 ## Links
 
 - Package: [@zennolab_com/capmonstercloud-client](https://www.npmjs.com/package/@zennolab_com/capmonstercloud-client)
-- Documentation: [docs.capmonster.cloud](https://docs.capmonster.cloud/)
-- Dashboard / API key: [dash.capmonster.cloud](https://dash.capmonster.cloud/)
+- Documentation: [docs.capmonster.cloud](https://docs.capmonster.cloud/?utm_source=github&utm_campaign=cmcrep)
+- Dashboard / API key: [dash.capmonster.cloud](https://dash.capmonster.cloud/?utm_source=github&utm_campaign=cmcrep)
 
 ## Installation
 
@@ -88,28 +92,30 @@ DEBUG=cmc-* node app.js
 
 ## Supported request classes
 
-- [AltchaRequest](https://docs.capmonster.cloud/docs/captchas/altcha-task)
-- [AmazonRequest](https://docs.capmonster.cloud/docs/captchas/amazon-task)
-- [BasiliskRequest](https://docs.capmonster.cloud/docs/captchas/Basilisk-task)
-- [BinanceRequest](https://docs.capmonster.cloud/docs/captchas/binance)
-- [CastleRequest](https://docs.capmonster.cloud/docs/captchas/castle-task)
-- [ComplexImageFunCaptchaRequest](https://docs.capmonster.cloud/docs/captchas/ComplexImageTask-Recognition)
-- [ComplexImageRecaptchaRequest](https://docs.capmonster.cloud/docs/captchas/recaptcha-click)
-- [ComplexImageTaskRecognitionRequest](https://docs.capmonster.cloud/docs/captchas/ComplexImageTask-Recognition)
-- [DataDomeRequest](https://docs.capmonster.cloud/docs/captchas/datadome)
-- [FunCaptchaRequest](https://docs.capmonster.cloud/docs/captchas/funcaptcha-task)
-- [GeeTestRequest](https://docs.capmonster.cloud/docs/captchas/geetest-task)
-- [HuntRequest](https://docs.capmonster.cloud/docs/captchas/hunt-task)
-- [ImageToTextRequest](https://docs.capmonster.cloud/docs/captchas/image-to-text)
-- [ImpervaRequest](https://docs.capmonster.cloud/docs/captchas/incapsula)
-- [MTCaptchaRequest](https://docs.capmonster.cloud/docs/captchas/mtcaptcha-task)
-- [ProsopoRequest](https://docs.capmonster.cloud/docs/captchas/prosopo-task)
-- [RecaptchaV2EnterpriseRequest](https://docs.capmonster.cloud/docs/captchas/recaptcha-v2-enterprise-task)
-- [RecaptchaV2Request](https://docs.capmonster.cloud/docs/captchas/no-captcha-task)
-- [RecaptchaV3EnterpriseRequest](https://docs.capmonster.cloud/docs/captchas/recaptcha-v3-enterprise-task)
-- [RecaptchaV3ProxylessRequest](https://docs.capmonster.cloud/docs/captchas/recaptcha-v3-task)
-- [TSPDRequest](https://docs.capmonster.cloud/docs/captchas/tspd-task)
-- [TemuRequest](https://docs.capmonster.cloud/docs/captchas/temu-task)
-- [TenDIRequest](https://docs.capmonster.cloud/docs/captchas/tendi)
-- [TurnstileRequest](https://docs.capmonster.cloud/docs/captchas/turnstile-task)
-- [YidunRequest](https://docs.capmonster.cloud/docs/captchas/yidun-task)
+- [AltchaRequest](https://docs.capmonster.cloud/docs/captchas/altcha-task?utm_source=github&utm_campaign=cmcrep)
+- [AmazonRequest](https://docs.capmonster.cloud/docs/captchas/amazon-task?utm_source=github&utm_campaign=cmcrep)
+- [BasiliskRequest](https://docs.capmonster.cloud/docs/captchas/Basilisk-task?utm_source=github&utm_campaign=cmcrep)
+- [BinanceRequest](https://docs.capmonster.cloud/docs/captchas/binance?utm_source=github&utm_campaign=cmcrep)
+- [CastleRequest](https://docs.capmonster.cloud/docs/captchas/castle-task?utm_source=github&utm_campaign=cmcrep)
+- [ComplexImageFunCaptchaRequest](https://docs.capmonster.cloud/docs/captchas/ComplexImageTask-Recognition?utm_source=github&utm_campaign=cmcrep)
+- [ComplexImageRecaptchaRequest](https://docs.capmonster.cloud/docs/captchas/recaptcha-click?utm_source=github&utm_campaign=cmcrep)
+- [ComplexImageTaskRecognitionRequest](https://docs.capmonster.cloud/docs/captchas/ComplexImageTask-Recognition?utm_source=github&utm_campaign=cmcrep)
+- [DataDomeRequest](https://docs.capmonster.cloud/docs/captchas/datadome?utm_source=github&utm_campaign=cmcrep)
+- [FunCaptchaRequest](https://docs.capmonster.cloud/docs/captchas/funcaptcha-task?utm_source=github&utm_campaign=cmcrep)
+- [GeeTestRequest](https://docs.capmonster.cloud/docs/captchas/geetest-task?utm_source=github&utm_campaign=cmcrep)
+- [HuntRequest](https://docs.capmonster.cloud/docs/captchas/hunt-task?utm_source=github&utm_campaign=cmcrep)
+- [ImageToTextRequest](https://docs.capmonster.cloud/docs/captchas/image-to-text?utm_source=github&utm_campaign=cmcrep)
+- [ImpervaRequest](https://docs.capmonster.cloud/docs/captchas/incapsula?utm_source=github&utm_campaign=cmcrep)
+- [MTCaptchaRequest](https://docs.capmonster.cloud/docs/captchas/mtcaptcha-task?utm_source=github&utm_campaign=cmcrep)
+- [ProsopoRequest](https://docs.capmonster.cloud/docs/captchas/prosopo-task?utm_source=github&utm_campaign=cmcrep)
+- [RecaptchaV2EnterpriseRequest](https://docs.capmonster.cloud/docs/captchas/recaptcha-v2-enterprise-task?utm_source=github&utm_campaign=cmcrep)
+- [RecaptchaV2Request](https://docs.capmonster.cloud/docs/captchas/no-captcha-task?utm_source=github&utm_campaign=cmcrep)
+- [RecaptchaV3EnterpriseRequest](https://docs.capmonster.cloud/docs/captchas/recaptcha-v3-enterprise-task?utm_source=github&utm_campaign=cmcrep)
+- [RecaptchaV3ProxylessRequest](https://docs.capmonster.cloud/docs/captchas/recaptcha-v3-task?utm_source=github&utm_campaign=cmcrep)
+- [TSPDRequest](https://docs.capmonster.cloud/docs/captchas/tspd-task?utm_source=github&utm_campaign=cmcrep)
+- [TemuRequest](https://docs.capmonster.cloud/docs/captchas/temu-task?utm_source=github&utm_campaign=cmcrep)
+- [TenDIRequest](https://docs.capmonster.cloud/docs/captchas/tendi?utm_source=github&utm_campaign=cmcrep)
+- [TurnstileRequest](https://docs.capmonster.cloud/docs/captchas/turnstile-task?utm_source=github&utm_campaign=cmcrep)
+- [YidunRequest](https://docs.capmonster.cloud/docs/captchas/yidun-task?utm_source=github&utm_campaign=cmcrep)
+
+:star:️ If you find this project useful, please give it a star on GitHub!
