@@ -18,6 +18,8 @@ import { AltchaResponse } from './Responses/AltchaResponse';
 import { CastleResponse } from './Responses/CastleResponse';
 import { TSPDResponse } from './Responses/TSPDResponse';
 import { HuntResponse } from './Responses/HuntResponse';
+import { AlibabaResponse } from './Responses/AlibabaResponse';
+import { FriendlyResponse } from './Responses/FriendlyResponse';
 
 export enum TaskResultType {
   Failed = 'Failed',
@@ -53,7 +55,9 @@ export type TaskCompletedSolution =
   | AltchaResponse
   | CastleResponse
   | TSPDResponse
-  | HuntResponse;
+  | HuntResponse
+  | AlibabaResponse
+  | FriendlyResponse;
 
 export type TaskCompleted<S extends TaskCompletedSolution> = {
   type: TaskResultType.Completed;
