@@ -737,6 +737,44 @@ describe('Check integration tests for CapMonsterCloudClientFactory()', () => {
     expect(await srv.destroy()).toBeUndefined();
   });
 
+  it('should solve Imperva Task', async () => {
+    expect.assertions(5);
+
+    const srv = await createServerMock({
+      responses: [
+        { responseBody: '{"errorId":0,"taskId":1234567}' },
+        {
+          responseBody:
+            '{"errorId":0,"status":"ready","solution":{"domains": { "site.com" : { "cookies": { "___utmvc": "NMB", "reese84": "reese84"}} } }}',
+        },
+      ],
+    });
+
+    const cmcClient = CapMonsterCloudClientFactory.Create(
+      new ClientOptions({ clientKey: '<your capmonster.cloud API key>', serviceUrl: `http://localhost:${srv.address.port}` }),
+    );
+
+    const impervaRequest = new ImpervaRequest({
+      websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle',
+      metadata: {
+        incapsulaScriptUrl: '_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3',
+        incapsulaCookies: 'l/LsGnrvyB9lNhXI8borDKa2IGc',
+      },
+    });
+
+    const task = await cmcClient.Solve(impervaRequest);
+
+    expect(srv.caughtRequests[0]).toHaveProperty(
+      'body',
+      '{"clientKey":"<your capmonster.cloud API key>","task":{"type":"CustomTask","websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle","metadata":{"incapsulaScriptUrl":"_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3","incapsulaCookies":"l/LsGnrvyB9lNhXI8borDKa2IGc"},"class":"Imperva"},"softId":54}',
+    );
+    expect(srv.caughtRequests[1]).toHaveProperty('body', '{"clientKey":"<your capmonster.cloud API key>","taskId":1234567}');
+    expect(task).toHaveProperty('solution');
+    expect(task).toHaveProperty('solution.domains', { 'site.com': { cookies: { ___utmvc: 'NMB', reese84: 'reese84' } } });
+
+    expect(await srv.destroy()).toBeUndefined();
+  });
+
   it('should solve Imperva Task with Proxy', async () => {
     expect.assertions(5);
 
@@ -757,8 +795,8 @@ describe('Check integration tests for CapMonsterCloudClientFactory()', () => {
     const impervaRequest = new ImpervaRequest({
       websiteURL: 'https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle',
       metadata: {
-        incapsulaScriptBase64: 'dmFyIF8weGQ2ZmU9Wydce..eDUzXHg2YV',
-        incapsulaSessionCookie: 'l/LsGnrvyB9lNhXI8borDKa2IGc',
+        incapsulaScriptUrl: '_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3',
+        incapsulaCookies: 'l/LsGnrvyB9lNhXI8borDKa2IGc',
       },
       proxy: {
         proxyType: 'http',
@@ -773,7 +811,7 @@ describe('Check integration tests for CapMonsterCloudClientFactory()', () => {
 
     expect(srv.caughtRequests[0]).toHaveProperty(
       'body',
-      '{"clientKey":"<your capmonster.cloud API key>","task":{"type":"CustomTask","websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle","metadata":{"incapsulaScriptBase64":"dmFyIF8weGQ2ZmU9Wydce..eDUzXHg2YV","incapsulaSessionCookie":"l/LsGnrvyB9lNhXI8borDKa2IGc"},"class":"Imperva","proxyType":"http","proxyAddress":"8.8.8.8","proxyPort":8080,"proxyLogin":"proxyLoginHere","proxyPassword":"proxyPasswordHere"},"softId":54}',
+      '{"clientKey":"<your capmonster.cloud API key>","task":{"type":"CustomTask","websiteURL":"https://lessons.zennolab.com/captchas/recaptcha/v2_simple.php?level=middle","metadata":{"incapsulaScriptUrl":"_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3","incapsulaCookies":"l/LsGnrvyB9lNhXI8borDKa2IGc"},"class":"Imperva","proxyType":"http","proxyAddress":"8.8.8.8","proxyPort":8080,"proxyLogin":"proxyLoginHere","proxyPassword":"proxyPasswordHere"},"softId":54}',
     );
     expect(srv.caughtRequests[1]).toHaveProperty('body', '{"clientKey":"<your capmonster.cloud API key>","taskId":1234567}');
     expect(task).toHaveProperty('solution');

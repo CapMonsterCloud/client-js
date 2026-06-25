@@ -20,7 +20,7 @@ import { DataDomeRequest, DataDomeRequestIn } from './Requests/DataDomeRequest';
 import { TenDIRequest, TenDIRequestIn } from './Requests/TenDIRequest';
 import { AmazonRequest, AmazonRequestIn } from './Requests/AmazonRequest';
 import { BasiliskRequest, BasiliskRequestIn } from './Requests/BasiliskRequest';
-import { ImpervaRequest, ImpervaRequestIn } from './Requests/ImpervaRequest';
+import { ImpervaRequest, ImpervaRequestIn, ImpervaMetadata } from './Requests/ImpervaRequest';
 import { BinanceRequest, BinanceRequestIn } from './Requests/BinanceRequest';
 import { ComplexImageRecognitionRequestIn, ComplexImageTaskRecognitionRequest } from './Requests/ComplexImageTaskRecognitionRequest';
 import { ProsopoRequest, ProsopoRequestIn } from './Requests/ProsopoRequest';
@@ -107,6 +107,7 @@ export {
   BasiliskRequestIn,
   ImpervaRequest,
   ImpervaRequestIn,
+  ImpervaMetadata,
   BinanceRequest,
   BinanceRequestIn,
   ComplexImageTaskRecognitionRequest,

@@ -92,7 +92,7 @@ DEBUG=cmc-* node app.js
 - [HCaptchaRequest](https://docs.capmonster.cloud/docs/captchas/)
 - [HuntRequest](https://zenno.link/hunt-en)
 - [ImageToTextRequest](https://zenno.link/doc-ImageToTextTask-en)
-- [ImpervaRequest](https://zenno.link/doc-imperva-en)
+- [ImpervaRequest](https://docs.capmonster.cloud/docs/captchas/incapsula/)
 - [MTCaptchaRequest](https://zenno.link/doc-mt-captcha-en)
 - [ProsopoRequest](https://zenno.link/doc-prosopo-en)
 - [RecaptchaV2EnterpriseRequest](https://zenno.link/doc-recaptcha2e-proxy-en)
