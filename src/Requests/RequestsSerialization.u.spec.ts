@@ -14,6 +14,8 @@ import { ComplexImageRecaptchaRequest } from './ComplexImageRecaptchaRequest';
 import { ComplexImageFunCaptchaRequest } from './ComplexImageFunCaptchaRequest';
 import { AmazonRequest } from './AmazonRequest';
 import { AltchaRequest } from './AltchaRequest';
+import { AlibabaRequest } from './AlibabaRequest';
+import { FriendlyRequest } from './FriendlyRequest';
 import { RecaptchaV3EnterpriseRequest } from './RecaptchaV3EnterpriseRequest';
 
 describe('Check unit tests for SerializeObject()', () => {
@@ -206,7 +208,7 @@ describe('Check unit tests for SerializeObject()', () => {
         websiteKey: '472fc7af-86a4-4382-9a49-ca9090474471',
         isInvisible: true,
         data: 'some data',
-        userAgent: expect(null == undefined).toBe(true),
+        userAgent: expect(true).toBe(true),
       },
     });
   });
@@ -237,7 +239,7 @@ describe('Check unit tests for SerializeObject()', () => {
         websiteKey: '472fc7af-86a4-4382-9a49-ca9090474471',
         isInvisible: true,
         data: 'some data',
-        userAgent: expect(null == undefined).toBe(true),
+        userAgent: expect(true).toBe(true),
         proxyType: 'https',
         proxyAddress: 'https://proxy.com',
         proxyPort: 6045,
@@ -771,6 +773,144 @@ describe('Check unit tests for SerializeObject()', () => {
         captchaScript: 'https://41bcdd4fb3cb.610cd090.us-east-1.captcha.awswaf.com/41bcdd4fb3cb/0d21de737ccb/cd77baa6c832/captcha.js',
         context: 'qoJYgnKsc...aormh/dYYK+Y=',
         iv: 'CgAAXFFFFSAAABVk',
+      },
+    });
+  });
+
+  it(`should serialize AlibabaRequest`, () => {
+    const serialized = SerializeObject({
+      clientKey: '<your capmonster.cloud API key>',
+      task: new AlibabaRequest({
+        websiteURL: 'https://www.example.com',
+        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        metadata: {
+          sceneId: '1ww7426c4',
+          prefix: 'dlw3kug',
+        },
+      }),
+    });
+
+    expect(serialized).toMatchObject({
+      clientKey: '<your capmonster.cloud API key>',
+      task: {
+        type: 'CustomTask',
+        class: 'alibaba',
+        websiteURL: 'https://www.example.com',
+        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        metadata: {
+          sceneId: '1ww7426c4',
+          prefix: 'dlw3kug',
+        },
+      },
+    });
+  });
+
+  it(`should serialize AlibabaRequest with proxy`, () => {
+    const serialized = SerializeObject({
+      clientKey: '<your capmonster.cloud API key>',
+      task: new AlibabaRequest({
+        websiteURL: 'https://www.example.com',
+        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        metadata: {
+          sceneId: '1ww7426c4',
+          prefix: 'dlw3kug',
+          userId: 'HpadJlQnz2zSKcSmjXBaqQvjYUvP4jMJIk/ZwGNDNiM=',
+        },
+        proxy: {
+          proxyType: 'http',
+          proxyAddress: '8.8.8.8',
+          proxyPort: 8080,
+          proxyLogin: 'proxyLoginHere',
+          proxyPassword: 'proxyPasswordHere',
+        },
+      }),
+    });
+
+    expect(serialized).toMatchObject({
+      clientKey: '<your capmonster.cloud API key>',
+      task: {
+        type: 'CustomTask',
+        class: 'alibaba',
+        websiteURL: 'https://www.example.com',
+        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        metadata: {
+          sceneId: '1ww7426c4',
+          prefix: 'dlw3kug',
+          userId: 'HpadJlQnz2zSKcSmjXBaqQvjYUvP4jMJIk/ZwGNDNiM=',
+        },
+        proxyType: 'http',
+        proxyAddress: '8.8.8.8',
+        proxyPort: 8080,
+        proxyLogin: 'proxyLoginHere',
+        proxyPassword: 'proxyPasswordHere',
+      },
+    });
+  });
+
+  it(`should serialize FriendlyRequest`, () => {
+    const serialized = SerializeObject({
+      clientKey: '<your capmonster.cloud API key>',
+      task: new FriendlyRequest({
+        websiteURL: 'https://example.com',
+        websiteKey: 'FFMGEMAD2K3JJ35P',
+        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        metadata: {
+          apiGetLib: 'https://cdn.jsdelivr.net/npm/friendly-challenge@0.9.15/widget.module.min.js',
+        },
+      }),
+    });
+
+    expect(serialized).toMatchObject({
+      clientKey: '<your capmonster.cloud API key>',
+      task: {
+        type: 'CustomTask',
+        class: 'friendly',
+        websiteURL: 'https://example.com',
+        websiteKey: 'FFMGEMAD2K3JJ35P',
+        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        metadata: {
+          apiGetLib: 'https://cdn.jsdelivr.net/npm/friendly-challenge@0.9.15/widget.module.min.js',
+        },
+      },
+    });
+  });
+
+  it(`should serialize FriendlyRequest with proxy`, () => {
+    const serialized = SerializeObject({
+      clientKey: '<your capmonster.cloud API key>',
+      task: new FriendlyRequest({
+        websiteURL: 'https://example.com',
+        websiteKey: 'FFMGEMAD2K3JJ35P',
+        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        metadata: {
+          apiGetLib: 'https://cdn.jsdelivr.net/npm/friendly-challenge@0.9.15/widget.module.min.js',
+        },
+        proxy: {
+          proxyType: 'http',
+          proxyAddress: '8.8.8.8',
+          proxyPort: 8080,
+          proxyLogin: 'proxyLoginHere',
+          proxyPassword: 'proxyPasswordHere',
+        },
+      }),
+    });
+
+    expect(serialized).toMatchObject({
+      clientKey: '<your capmonster.cloud API key>',
+      task: {
+        type: 'CustomTask',
+        class: 'friendly',
+        websiteURL: 'https://example.com',
+        websiteKey: 'FFMGEMAD2K3JJ35P',
+        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        metadata: {
+          apiGetLib: 'https://cdn.jsdelivr.net/npm/friendly-challenge@0.9.15/widget.module.min.js',
+        },
+        proxyType: 'http',
+        proxyAddress: '8.8.8.8',
+        proxyPort: 8080,
+        proxyLogin: 'proxyLoginHere',
+        proxyPassword: 'proxyPasswordHere',
       },
     });
   });

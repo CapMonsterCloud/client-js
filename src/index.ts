@@ -31,6 +31,8 @@ import { CastleRequest, CastleRequestIn } from './Requests/CastleRequest';
 import { TSPDRequest, TSPDRequestIn } from './Requests/TSPDRequest';
 import { HuntRequest, HuntRequestIn } from './Requests/HuntRequest';
 import { AltchaRequest, AltchaRequestIn } from './Requests/AltchaRequest';
+import { AlibabaRequest, AlibabaRequestIn } from './Requests/AlibabaRequest';
+import { FriendlyRequest, FriendlyRequestIn } from './Requests/FriendlyRequest';
 
 export default {
   CapMonsterCloudClientFactory,
@@ -61,6 +63,8 @@ export default {
   TSPDRequest,
   HuntRequest,
   AltchaRequest,
+  AlibabaRequest,
+  FriendlyRequest,
   RecaptchaV3EnterpriseRequest,
 };
 
@@ -123,6 +127,10 @@ export {
   HuntRequestIn,
   AltchaRequest,
   AltchaRequestIn,
+  AlibabaRequest,
+  AlibabaRequestIn,
+  FriendlyRequest,
+  FriendlyRequestIn,
   RecaptchaV3EnterpriseRequest,
   RecaptchaV3EnterpriseRequestIn,
 };
